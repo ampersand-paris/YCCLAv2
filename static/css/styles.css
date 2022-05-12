@@ -33,18 +33,30 @@
     font-size: 2em;
     text-transform: uppercase;
   }
-  
+  p {
+    font-family: century-gothic, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: var(--main-blue);
+  }
+
+  li {
+    font-family: century-gothic, sans-serif;
+    font-weight: 700;
+    font-style: normal;
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
+
   label {
-    font-family: century-gothic,sans-serif;
+    font-family: century-gothic, sans-serif;
     font-weight: 700;
     font-style: normal;
     color: var(--main-blue);
     width: 30vW;
-  }
-  
-  a {
-    color: black;
-    text-decoration: none;
   }
   
   .active {

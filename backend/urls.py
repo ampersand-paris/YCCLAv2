@@ -19,7 +19,9 @@ from django.conf import settings
 from django.conf.urls.static import static
 
 from accounts.views import(
-    register_view
+    register_view,
+    login_view,
+    logout_view,
 )
 
 from main_app.views import (
@@ -28,6 +30,8 @@ from main_app.views import (
 
 urlpatterns = [
     path('', home_screen_view, name='home'),
+    path('login/', login_view, name='login'),
+    path('logout/', logout_view, name='logout'),
     path('register/', register_view, name='register'),
     path('admin/', admin.site.urls),
 ]

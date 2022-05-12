@@ -3,27 +3,27 @@
 
 {% block body %}
 
-<div>
-    <form method="post">
+<div class="page-height flex center al-center">
+    <div class="double-border red-border">
+    <form class="flex column extra-padding red-border" method="post">
         {% csrf_token %}
-        <input type="email" name="email" id="inputEmail" placeholder="Email address" required>
-        <input type="text" name="username" id="inputUsername" placeholder="Username" required>
-        <input type="password" name="password1" id="inputPassword1" placeholder="Password" required>
-        <input type="password" name="password2" id="inputPassword2" placeholder="Confirm Password" required>
+        <input class="flex space-btwn baseline margin-top" type="email" name="email" id="inputEmail" placeholder="Email address" required>
+        <input class="flex space-btwn baseline margin-top" type="text" name="username" id="inputUsername" placeholder="Username" required>
+        <input class="flex space-btwn baseline margin-top" type="password" name="password1" id="inputPassword1" placeholder="Password" required>
+        <input class="flex space-btwn baseline margin-top" type="password" name="password2" id="inputPassword2" placeholder="Confirm Password" required>
         {% for field in registration_form %}
-        <p>
         {% for error in field.errors %}
         <p style="color: red">{{ error }}</p>
         {% endfor %}
-        </p>
         {% endfor %}
         {% if registration_form.non_field_errors %}
         <div style="color: red">
             <p>{{ registration_form.non_field_errors }}</p>
         </div>
         {% endif %}
-        <button type="submit">Register</button>
+        <button class="stnd-bttn red-border padding margin-top" logintype="submit">Register</button>
     </form>
+    </div>
 </div>
 
 {% endblock body %}
