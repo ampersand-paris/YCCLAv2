@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="page-height flex center al-center">
+    <div class="double-border red-border">
+        <form class="flex column extra-padding red-border" method="post">
+            {% csrf_token %}
+			<input class="flex space-btwn baseline margin-top" type="email" name="email" id="inputEmail" placeholder="Email address" required>
+			<input class="flex space-btwn baseline margin-top" type="password" name="password" id="inputPassword" placeholder="Password" required>
+			{% for field in login_form %}
+            {% for error in field.errors %}
+                {% if error == ' ' %}
+                <p style="display: none">{{ error }}</p>
+                {% else %}
+                <p style="color: red">{{ error }}</p>
+                {% endif %}
+            {% endfor %}
+			{% endfor %}
+			{% if login_form.non_field_errors %}
+			<div style="color: red">
+			<p>{{login_form.non_field_errors}}</p>
+			</div>
+			{% endif %}
+			<button class="stnd-bttn red-border padding margin-top" type="submit">Log in</button>
+		</form>
+		<div class="flex center">
+			<a class="m-auto" href="#"><p>Reset password</p></a>
+		</div>
+	</div>
+</div>
+
+{% endblock body %}

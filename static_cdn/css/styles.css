@@ -1,0 +1,148 @@
+/* === COLOR === */
+
+:root {
+    --cream: #F9FAE2;
+    --main-red: #9D2D33;
+    --main-blue: #1D5DA0;
+  }
+  
+  body {
+    margin: 0;
+    padding: 1vH 2vW;
+    background-color: var(--cream);
+  }
+  
+  /* === FONTS === */
+  
+  h1 {
+    font-family: bilo, sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    font-size: 3em;
+    margin: 0;
+    padding: 0;
+    text-transform: uppercase;
+  }
+  
+  h2 {
+    font-family: bilo, sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    font-size: 2em;
+    text-transform: uppercase;
+  }
+  p {
+    font-family: century-gothic,sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: var(--main-blue);
+  }
+
+  a {
+    color: black;
+    text-decoration: none;
+  }
+
+  label {
+    font-family: century-gothic,sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: var(--main-blue);
+    width: 30vW;
+  }
+  
+  .active {
+    color: var(--main-blue);
+  }
+  
+  /* === SPACING === */
+  
+  .flex {
+    display: flex;
+  }
+  
+  .column {
+    flex-direction: column;
+  }
+  
+  .space-btwn {
+    justify-content: space-between;
+  }
+  
+  .al-center {
+    align-items: center;
+  }
+  
+  .baseline {
+    align-items: baseline;
+  }
+  
+  .page-height {
+    height: 80vH;
+  }
+  
+  .center {
+    justify-content: center;
+  }
+  
+  .col-center {
+    align-items: center;
+  }
+  
+  .padding {
+    padding: 1vH 2vW;
+  }
+  
+  .margin-top {
+    margin-top: 2vH;
+  }
+  
+  .extra-padding {
+    padding: 10vH 5vW
+  }
+  
+  .double-border {
+    padding: 3px;
+  }
+  
+  /* === BORDERS === */
+  
+  .red-border {
+    border: 2px solid var(--main-red);
+  }
+  
+  /* === BUTTONS === */
+  
+  .stnd-bttn {
+    background-color: transparent;
+    /* border: none; */
+    color: var(--main-blue);
+    font-family: bilo, sans-serif;
+    font-style: italic;
+    font-size: 2em;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+  
+  /* === FORMS === */
+  
+  input {
+    background-color: transparent;
+    border-bottom: 1px solid var(--main-red);
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    color: var(--main-blue);
+    font-family: bilo, sans-serif;
+    font-style: italic;
+    font-size: 1em;
+    font-weight: 700;
+    width: 20vW;
+  }
+  
+  input:focus {
+    outline: none;
+  }
+  
