@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div>
+    <form method="post">
+        {% csrf_token %}
+        <input type="email" name="email" id="inputEmail" placeholder="Email address" required>
+        <input type="text" name="username" id="inputUsername" placeholder="Username" required>
+        <input type="password" name="password1" id="inputPassword1" placeholder="Password" required>
+        <input type="password" name="password2" id="inputPassword2" placeholder="Confirm Password" required>
+        {% for field in registration_form %}
+        <p>
+        {% for error in field.errors %}
+        <p style="color: red">{{ error }}</p>
+        {% endfor %}
+        </p>
+        {% endfor %}
+        {% if registration_form.non_field_errors %}
+        <div style="color: red">
+            <p>{{ registration_form.non_field_errors }}</p>
+        </div>
+        {{% endif %}}
+        <button type="submit">Register</button>
+    </form>
+</div>
+
+{% endblock content %}
