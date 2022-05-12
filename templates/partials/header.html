@@ -1,0 +1,22 @@
+<div class="">
+	<div class="">
+		<h5 class="">
+			<a class="" href="{% url 'home' %}">Home</a>
+		</h5>
+		<div class="">
+			<nav class="">
+				{% if request.user.is_authenticated %}
+					<div class="">
+						<div class="" aria-labelledby="id_profile_links">
+							<a class="" href="">My Profile</a>
+							<a class="" href="">Logout</a>
+						</div>
+					</div>
+				{% else %}
+					<a class="" href="">Login</a>
+					<a class="" href="{% url 'register' %}">Register</a>
+				{% endif %}	
+			</nav>
+		</div>
+	</div>
+</div>

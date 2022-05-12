@@ -21,7 +21,7 @@ class RegistrationForm(UserCreationForm):
         raise forms.ValidationError(f"Email {email} is already in use.")
 
     def clean_username(self):
-        email = self.cleaned_data['unsername'].lower()
+        username = self.cleaned_data['username'].lower()
         try:
             username = CustomUser.objects.get(username=username)
         except Exception as e:
