@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="">
+	<p class="">Email</p>
+	{%  if is_self %}
+	  	<h5>{{email}}</h5>
+	{% else %}
+	{% if hide_email %}
+	    <h5>**********</h5>
+	{% else %}
+		<h5>{{email}}</h5>
+	{% endif %}
+	{% endif %}
+	<p class="">Username</p>
+	<h5>{{username}}</h5>
+	<!-- If Auth user is viewing their own profile -->
+	{% if is_self %}
+	    <a  class="" href="#">Update</a>
+		<div class="">
+			<a class="" href="#">Change password</a>
+		</div>
+	{% endif %}
+</div>
+{% if request.user.is_authenticated %}
+	
+{% endif %}
+
+{% endblock body %}
