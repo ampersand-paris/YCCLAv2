@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="">
+	<form class="" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+		<h6 class="">Email</h6>
+		<input type="email" name="email" id="id_input_email" class="" placeholder="Email address" required value={{form.initial.email}}>
+	  	<h6 class="">Username</h6>
+	    <input type="text" name="username" id="id_input_username" class="" placeholder="Username" required value={{form.initial.username}}>
+        <h6 class="">Bio</h6>
+		<input type="text" name="bio" id="id_input_bio" class="" placeholder="Bio" required value="{{form.initial.bio}}">
+	  	<h6 class="">First Name</h6>
+	    <input type="text" name="fname" id="id_input_fname" class="" placeholder="First Name" required value="{{form.initial.fname}}">
+        <h6 class="">Last Name</h6>
+	    <input type="text" name="lname" id="id_input_lname" class="" placeholder="Last Name" required value="{{form.initial.lname}}">
+        {% for field in login_form %}
+        {% for error in field.errors %}
+        {% if error == ' ' %}
+            <p style="display: none">{{ error }}</p>
+            {% else %}
+            <p style="color: red">{{ error }}</p>
+            {% endif %}
+        {% endfor %}
+        {% endfor %}
+		{% if form.non_field_errors %}
+			<div style="color: red">
+				<p>{{form.non_field_errors}}</p>
+			</div>
+		{% endif %}
+		<div class="">
+			<button class="" type="submit">Update</button>
+		</div>
+	</form>
+</div>
+
+{% endblock body %}
