@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
-from accounts.forms import RegistrationForm, AccountAuthenticationForm
+from accounts.forms import RegistrationForm, AccountAuthenticationForm, AccountUpdateForm
 from django.conf import settings
 
 from accounts.models import CustomUser
@@ -78,6 +78,9 @@ def account_view(request, *args, **kwargs):
         context['username'] = account.username
         context['email'] = account.email
         context['hide_email'] = account.username
+        context['bio'] = account.bio
+        context['fname'] = account.fname
+        context['lname'] = account.lname
 
         is_self = True
         is_friend = False
@@ -92,3 +95,48 @@ def account_view(request, *args, **kwargs):
         context['BASE_URL'] = settings.BASE_URL
 
         return render(request, "accounts/account.html", context)
+
+def edit_account_view(request, *args, **kwargs):
+
+    if not request.user.is_authenticated:
+        return redirect('login')
+    user_id =  kwargs.get('user_id')
+    # account = CustomUser.objects.get(pk=user_id)
+    try: 
+        account = CustomUser.objects.get(pk=user_id)
+    except  CustomUser.DoesNotExist:
+        return HttpResponse('Something went wrong.')
+    if account.pk != request.user.pk:
+        return HttpResponse('You cannot edit someone elses profile.')
+    context = {}
+    if request.POST:
+        form = AccountUpdateForm(request.POST, instance=request.user)
+        print(form)
+        if form.is_valid():
+            form.save()
+            return redirect('account:view', user_id=account.pk)
+        else: 
+            form = AccountUpdateForm(request.POST, instance=request.user,
+                initial = {
+                    "id": account.pk,
+                    "email": account.email,
+                    "username": account.username,
+                    # "fname": account.fname,
+                    # "lname": account.lname,
+                    # "bio": account.bio,
+                }
+            )
+            context['form'] = form
+    else: 
+        form = AccountUpdateForm(
+                initial = {
+                    "id": account.pk,
+                    "email": account.email,
+                    "username": account.username,
+                    # "fname": account.fname,
+                    # "lname": account.lname,
+                    # "bio": account.bio,
+                })
+        context['form'] = form
+
+    return render(request, "accounts/edit_account.html", context)
