@@ -69,9 +69,9 @@ class AccountUpdateForm(forms.ModelForm):
         account = super(AccountUpdateForm, self).save(commit=False)
         account.username = self.cleaned_data['username']
         account.email = self.cleaned_data['email'].lower()
-        account.username = self.cleaned_data['fname']
-        account.username = self.cleaned_data['lname']
-        account.username = self.cleaned_data['bio']
+        account.fname = self.cleaned_data['fname']
+        account.lname = self.cleaned_data['lname']
+        account.bio = self.cleaned_data['bio']
         if commit:
             account.save()
         return account

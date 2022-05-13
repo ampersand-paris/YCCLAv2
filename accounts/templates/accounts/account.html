@@ -3,32 +3,58 @@
 
 {% block body %}
 
-<div class="">
-	<p class="">Email</p>
-	{%  if is_self %}
-	  	<h5>{{email}}</h5>
-	{% else %}
-	{% if hide_email %}
-	    <h5>**********</h5>
-	{% else %}
-		<h5>{{email}}</h5>
-	{% endif %}
-	{% endif %}
-	<p class="">Username</p>
-    <h5>{{fname}} {{lname}}</h5>
-	<h5>{{username}}</h5>
-    <p class="">Bio</p>
-	<p>{{bio}}</p>
-	<!-- If Auth user is viewing their own profile -->
-	{% if is_self %}
-	    <a  class="" href="{% url 'account:edit' user_id=id %}">Update</a>
-		<div class="">
-			<a class="" href="#">Change password</a>
-		</div>
-	{% endif %}
+<div class="flex margin-top space-btwn">
+    <div class="flex double-border bg-blue cream-border">
+        <div class="prof-height flex column space-btwn padding bg-blue cream-border">
+            <div>
+                <h3 class="cream-text">{{fname}} {{lname}}</h3>
+                <h4 class="cream-text margin-top">Email</h4>
+                {%  if is_self %}
+                    <p class="cream-text no-margin">{{email}}</p>
+                {% else %}
+                {% if hide_email %}
+                    <p class="cream-text no-margin">**********</p>
+                {% else %}
+                    <p class="cream-text no-margin">{{email}}</p>
+                {% endif %}
+                {% endif %}
+                <h4 class="cream-text margin-top">Username</h4>
+                <p class="cream-text no-margin">{{username}}</p>
+                <h4 class="cream-text margin-top">Bio</h4>
+                <p class="cream-text no-margin">{{bio}}</p>
+            </div>
+            <!-- If Auth user is viewing their own profile -->
+            {% if is_self %}
+                <div class="flex column col-center">
+                    <a  href="{% url 'account:edit' user_id=id %}"><button class="prof-bttn red-border padding margin-top">Update</button></a>
+                    <a  href="#"><button class="prof-bttn red-border padding margin-top">Change password</button></a>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    {% if request.user.is_recipe_tester %}
+    <div class="cream-border double-border bg-blue">
+        <div class="prof-post-view flex column bg-blue cream-border padding">  
+            <div class="flex space-btwn  al-center">
+                <h2 class="cream-text">My Posts</h2> 
+                <a  class="" href="{% url 'test-kitchen:create' %}"><button class="stnd-bttn red-border bg-cream padding margin-top">New Post</button></a>
+            </div>
+            {% for post in posts %}
+                {% if post.user.pk == user.pk %}
+                <div class="padding margin-top bg-cream red-border">
+                    <div class="flex space-btwn">
+                        <h2>{{ post.title }}</h2>
+                        <p> {{ post.date }}</p>
+                    </div>
+                    <p> {{ post.post }}</p>
+                    <a  href="../../test-kitchen/{{post.pk}}/update/"><button class="prof-bttn red-border padding margin-top">Edit post</button></a>
+                </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        </div>
+	</div>
+
 </div>
-{% if request.user.is_authenticated %}
-	
-{% endif %}
 
 {% endblock body %}

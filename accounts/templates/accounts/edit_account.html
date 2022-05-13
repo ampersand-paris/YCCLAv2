@@ -3,37 +3,40 @@
 
 {% block body %}
 
-<div class="">
-	<form class="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-		<h6 class="">Email</h6>
-		<input type="email" name="email" id="id_input_email" class="" placeholder="Email address" required value={{form.initial.email}}>
-	  	<h6 class="">Username</h6>
-	    <input type="text" name="username" id="id_input_username" class="" placeholder="Username" required value={{form.initial.username}}>
-        <h6 class="">Bio</h6>
-		<input type="text" name="bio" id="id_input_bio" class="" placeholder="Bio" required value="{{form.initial.bio}}">
-	  	<h6 class="">First Name</h6>
-	    <input type="text" name="fname" id="id_input_fname" class="" placeholder="First Name" required value="{{form.initial.fname}}">
-        <h6 class="">Last Name</h6>
-	    <input type="text" name="lname" id="id_input_lname" class="" placeholder="Last Name" required value="{{form.initial.lname}}">
-        {% for field in login_form %}
-        {% for error in field.errors %}
-        {% if error == ' ' %}
-            <p style="display: none">{{ error }}</p>
-            {% else %}
-            <p style="color: red">{{ error }}</p>
+<div class="page-height flex center al-center">
+    <div class="double-border red-border">
+        <form class="flex column padding red-border" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <h2>Update Profile</h2>
+            <h4 class="margin-top">Email</h4>
+            <input type="email" name="email" id="id_input_email" class="flex space-btwn baseline" placeholder="Email address" required value={{form.initial.email}}>
+            <h4 class="margin-top">Username</h4>
+            <input type="text" name="username" id="id_input_username" class="flex space-btwn baseline" placeholder="Username" required value={{form.initial.username}}>
+            <h4 class="margin-top">Bio</h4>
+            <input type="text" name="bio" id="id_input_bio" class="flex space-btwn baseline" placeholder="Bio" required value="{{form.initial.bio}}">
+            <h4 class="margin-top">First Name</h4>
+            <input type="text" name="fname" id="id_input_fname" class="flex space-btwn baseline" placeholder="First Name" required value="{{form.initial.fname}}">
+            <h4 class="margin-top">Last Name</h4>
+            <input type="text" name="lname" id="id_input_lname" class="flex space-btwn baseline" placeholder="Last Name" required value="{{form.initial.lname}}">
+            {% for field in login_form %}
+            {% for error in field.errors %}
+            {% if error == ' ' %}
+                <p style="display: none">{{ error }}</p>
+                {% else %}
+                <p style="color: red">{{ error }}</p>
+                {% endif %}
+            {% endfor %}
+            {% endfor %}
+            {% if form.non_field_errors %}
+                <div style="color: red">
+                    <p>{{form.non_field_errors}}</p>
+                </div>
             {% endif %}
-        {% endfor %}
-        {% endfor %}
-		{% if form.non_field_errors %}
-			<div style="color: red">
-				<p>{{form.non_field_errors}}</p>
-			</div>
-		{% endif %}
-		<div class="">
-			<button class="" type="submit">Update</button>
-		</div>
-	</form>
+            <div class="flex center">
+                <button class="stnd-bttn red-border padding margin-top" type="submit">Update</button>
+            </div>
+        </form>
+    </div>
 </div>
 
 {% endblock body %}
