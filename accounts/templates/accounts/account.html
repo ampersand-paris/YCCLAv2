@@ -40,7 +40,7 @@
                 <a  class="" href="{% url 'test-kitchen:create' %}"><button class="stnd-bttn red-border bg-cream padding margin-top">New Post</button></a>
             </div>
             {% for post in posts %}
-                {% if post.pk == user.pk %}
+                {% if post.user.pk == user.pk %}
                 <div class="padding margin-top bg-cream red-border">
                     <div class="flex space-btwn">
                         <h2>{{ post.title }}</h2>

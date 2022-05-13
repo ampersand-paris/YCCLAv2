@@ -91,3 +91,22 @@ def edit_test_kitchen_view(request, pk):
         context['form'] = form
 
     return render(request, "TestKitchenUpdate.html", context)
+
+def test_kitchen_delete(request, pk):
+    if not request.user.is_authenticated:
+        return redirect('login')
+    user_id =  request.user.id
+    post_id = pk
+    post = TestKitchenPost.objects.get(pk=post_id)
+    try: 
+        account = CustomUser.objects.get(id=user_id)
+    except  CustomUser.DoesNotExist:
+        return HttpResponse('Something went wrong.')
+    if account.id != post.user.id:
+        return HttpResponse('You cannot delete someone elses post.')
+    else:
+        post.delete()
+        
+        return redirect('account:view', user_id=user_id)
+    
+    return render(request)
