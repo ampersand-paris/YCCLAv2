@@ -21,19 +21,12 @@
     <div class="cream-border double-border bg-blue">
         <div class="prof-post-view flex column bg-blue cream-border padding">  
             <div class="flex space-btwn  al-center">
-                <h2 class="cream-text">Test Kitchen Posts</h2> 
-                <a  class="" href="{% url 'test-kitchen:create' %}"><button class="stnd-bttn red-border bg-cream padding margin-top">New Post</button></a>
+                <h2 class="cream-text">{{ object.title }}</h2> 
+                <p class="cream-text">  {{ object.date }} | {{ object.user.username }}</p>
             </div>
-            {% for post in posts %}
                 <div class="padding margin-top bg-cream red-border">
-                    <div class="flex space-btwn">
-                        <h2>{{ post.title }}</h2>
-                        <p> {{ post.date }} | {{ post.user.username }}</p>
-                    </div>
-                    <p> {{ post.post }}</p>
-                    <a  class="" href="./{{post.pk}}/"><button>Read More</button></a> 
+                    <p> {{ object.post }}</p>
                 </div>
-            {% endfor %}
     {% endif %}
         </div>
 	</div>

@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from test_kitchen.forms import TestKitchenPostCreate
+from test_kitchen.forms import TestKitchenPostCreate, TestKitchenPostUpdateForm
 from test_kitchen.models import TestKitchenPost
 from accounts.models import CustomUser
+from django.views.generic.detail import DetailView
 
 # Create your views here.
 def test_kitchen_list(request, *args):
@@ -15,6 +16,14 @@ def test_kitchen_list(request, *args):
     if account:
         context['posts'] = TestKitchenPost.objects.all()
     return render(request, "TestKitchenList.html", context)
+
+class TestKitchenDetail(DetailView):
+    model = TestKitchenPost
+    template_name = "TestKitchenDetail.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        return context
 
 def get_redirect_if_exists(request):
     redirect = None
@@ -41,3 +50,43 @@ def test_kitchen_create(request, *args, **kwargs):
             return redirect('account:view', user_id=user.pk)
 
     return render(request, "TestKitchenCreate.html", context)
+
+def edit_test_kitchen_view(request, *args, **kwargs):
+
+    if not request.user.is_authenticated:
+        return redirect('login')
+    user_id =  request.user.id
+    post_id = kwargs.get('post_id')
+    form = TestKitchenPostUpdateForm(request.POST, instance=request.user)
+    try: 
+        account = CustomUser.objects.get(pk=user_id)
+        post = TestKitchenPost.objects.get(pk=post_id)
+    except  CustomUser.DoesNotExist:
+        return HttpResponse('Something went wrong.')
+    if account.pk != form.user.pk:
+        return HttpResponse('You cannot edit someone elses post.')
+    context = {}
+    if request.POST:
+        print(form)
+        if form.is_valid():
+            form.save()
+            return redirect('test-kitchen', user_id=account.pk)
+        else: 
+            form = TestKitchenPostUpdateForm(request.POST, instance=request.user,
+                initial = {
+                    "id": post.pk,
+                    "title": post.title,
+                    "post": post.post,
+                }
+            )
+            context['form'] = form
+    else: 
+        form = TestKitchenPostUpdateForm(
+                initial = {
+                    "id": post.pk,
+                    "title": post.title,
+                    "post": post.post,
+                })
+        context['form'] = form
+
+    return render(request, "test-kitchen/", context)
