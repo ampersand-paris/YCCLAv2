@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="flex margin-top space-btwn">
+    <h1>Recipes View</h1>
+    <div class="cream-border double-border bg-blue">
+        <div class="prof-post-view flex column bg-blue cream-border padding">  
+            <div class="flex space-btwn  al-center">
+                <h2 class="cream-text">Recipes</h2> 
+            </div>
+                <div class="padding margin-top bg-cream red-border">
+                    <div class="flex space-btwn">
+                        <h2>{{ recipe.title }}</h2>
+                        <ul>
+                            {% for ingredient in recipe.ingredients %}
+                            <li>{{ ingredient }}</li>
+                            {% endfor %}
+                        </ul>
+                        <ul>
+                            {% for step in recipe.preparation %}
+                            <p>{{ forloop.counter }}. {{ step }}</p>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <a  class="" href="./{{recipe.pk}}/"><button>Read More</button></a> 
+                </div>
+        </div>
+	</div>
+
+</div>
+
+{% endblock body %}
