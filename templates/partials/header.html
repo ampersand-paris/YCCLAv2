@@ -6,8 +6,10 @@
 	<a class="" href=""><h2>Summer 2022 Set</h2></a>
 	<a class="" href=""><h2>Recipes</h2></a>
 	{% if request.user.is_authenticated %}
+		{% if request.user.is_recipe_tester %}
+			<a class="" href="{% url 'test-kitchen:list' %}"><h2>Test Kitchen</h2></a>
+		{% endif %}
 		<a class="" href="{% url 'account:view' user_id=request.user.id %}"><h2>My Profile</h2></a>
-		<a class="" href=""><h2>Test Kitchen</h2></a>
 		<a class="" href="{% url 'logout' %}"><h2>Logout</h2></a>
 	{% else %}
 		<a class="" href="{% url 'login' %}"><h2>Login</h2></a>

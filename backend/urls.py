@@ -34,6 +34,7 @@ urlpatterns = [
     path('account/', include('accounts.urls', namespace="account")),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
+    path('test-kitchen/', include('test_kitchen.urls', namespace="test-kitchen")),   
     path('register/', register_view, name='register'),
 ]
 

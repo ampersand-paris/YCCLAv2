@@ -26,8 +26,13 @@
 			<a class="" href="#">Change password</a>
 		</div>
 	{% endif %}
+    
 </div>
-{% if request.user.is_authenticated %}
+
+{% if request.user.is_recipe_tester %}
+<div>
+    <a  class="" href="{% url 'test-kitchen:create' %}">New Post</a>
+</div>
 	
 {% endif %}
 

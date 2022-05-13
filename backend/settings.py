@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     # MY APPS
     'accounts',
     'main_app',
+    'test_kitchen',
 
     'django.contrib.admin',
     'django.contrib.auth',

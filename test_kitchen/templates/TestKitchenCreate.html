@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="page-height flex center al-center">
+    <div class="double-border red-border">
+        <h1>Test Kitchen Create</h1>
+        <form class="flex column extra-padding red-border" method="POST">
+            {% csrf_token %}
+            <label class="flex space-btwn baseline">Post Title</label>
+            <input  
+                class="margin-top"
+                type="text"
+                name="title"
+                placeholder="Recipe Test"
+            >
+            <label class="flex space-btwn baseline">What happened?</label>
+            <input  
+                class="margin-top"
+                type="textarea"
+                name="post"
+                placeholder="Please share your experience"
+            >
+            <input  
+                value="{{request.user.pk}}"
+                type="hidden"
+                name="user"
+            >
+            <button class="stnd-bttn red-border padding margin-top" type="submit">Create Post</button>
+        </form>
+    </div>
+</div>
+
+{% endblock body %}
