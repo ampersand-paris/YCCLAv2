@@ -51,26 +51,27 @@ def test_kitchen_create(request, *args, **kwargs):
 
     return render(request, "TestKitchenCreate.html", context)
 
-def edit_test_kitchen_view(request, *args, **kwargs):
+def edit_test_kitchen_view(request, pk):
 
     if not request.user.is_authenticated:
         return redirect('login')
     user_id =  request.user.id
-    post_id = kwargs.get('post_id')
-    form = TestKitchenPostUpdateForm(request.POST, instance=request.user)
+    post_id = pk
+    post = TestKitchenPost.objects.get(pk=post_id)
+    form = TestKitchenPostUpdateForm(request.POST, instance=post)
     try: 
-        account = CustomUser.objects.get(pk=user_id)
-        post = TestKitchenPost.objects.get(pk=post_id)
+        account = CustomUser.objects.get(id=user_id)
     except  CustomUser.DoesNotExist:
         return HttpResponse('Something went wrong.')
-    if account.pk != form.user.pk:
+    if account.id != post.user.id:
         return HttpResponse('You cannot edit someone elses post.')
     context = {}
     if request.POST:
         print(form)
         if form.is_valid():
+            print('view save')
             form.save()
-            return redirect('test-kitchen', user_id=account.pk)
+            return redirect('test-kitchen:list')
         else: 
             form = TestKitchenPostUpdateForm(request.POST, instance=request.user,
                 initial = {
@@ -89,4 +90,4 @@ def edit_test_kitchen_view(request, *args, **kwargs):
                 })
         context['form'] = form
 
-    return render(request, "test-kitchen/", context)
+    return render(request, "TestKitchenUpdate.html", context)

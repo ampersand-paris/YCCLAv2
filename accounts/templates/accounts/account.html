@@ -42,9 +42,12 @@
             {% for post in posts %}
                 {% if post.pk == user.pk %}
                 <div class="padding margin-top bg-cream red-border">
-                    <h2>{{ post.title }}</h2>
-                    <p> {{ post.date }}</p>
+                    <div class="flex space-btwn">
+                        <h2>{{ post.title }}</h2>
+                        <p> {{ post.date }}</p>
+                    </div>
                     <p> {{ post.post }}</p>
+                    <a  href="../../test-kitchen/{{post.pk}}/update/"><button class="prof-bttn red-border padding margin-top">Edit post</button></a>
                 </div>
                 {% endif %}
             {% endfor %}
