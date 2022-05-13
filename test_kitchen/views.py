@@ -1,9 +1,20 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from test_kitchen.forms import TestKitchenPostCreate
+from test_kitchen.models import TestKitchenPost
+from accounts.models import CustomUser
+
 # Create your views here.
-def test_kitchen_list(request):
-	return render(request, "TestKitchenList.html")
+def test_kitchen_list(request, *args):
+    context = {}
+    user_id =  request.user.pk
+    try: 
+        account = CustomUser.objects.get(pk=user_id)
+    except  CustomUser.DoesNotExist:
+        return HttpResponse('That user does not exist.')
+    if account:
+        context['posts'] = TestKitchenPost.objects.all()
+    return render(request, "TestKitchenList.html", context)
 
 def get_redirect_if_exists(request):
     redirect = None

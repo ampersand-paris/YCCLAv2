@@ -8,5 +8,8 @@ class TestKitchenPost(models.Model):
     date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     
+    class Meta:
+        ordering = ['-date']
+
     def __str__(self):
         return self.title

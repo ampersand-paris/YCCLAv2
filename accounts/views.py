@@ -5,6 +5,8 @@ from accounts.forms import RegistrationForm, AccountAuthenticationForm, AccountU
 from django.conf import settings
 
 from accounts.models import CustomUser
+from test_kitchen.models import TestKitchenPost
+
 # Create your views here.
 
 def register_view(request, *args, **kwargs):
@@ -66,7 +68,7 @@ def get_redirect_if_exists(request):
     return redirect
 
 def account_view(request, *args, **kwargs):
-
+        
     context = {}
     user_id =  kwargs.get('user_id')
     try: 
@@ -81,6 +83,8 @@ def account_view(request, *args, **kwargs):
         context['bio'] = account.bio
         context['fname'] = account.fname
         context['lname'] = account.lname
+        context['posts'] = TestKitchenPost.objects.all()
+
 
         is_self = True
         is_friend = False
@@ -121,9 +125,9 @@ def edit_account_view(request, *args, **kwargs):
                     "id": account.pk,
                     "email": account.email,
                     "username": account.username,
-                    # "fname": account.fname,
-                    # "lname": account.lname,
-                    # "bio": account.bio,
+                    "fname": account.fname,
+                    "lname": account.lname,
+                    "bio": account.bio,
                 }
             )
             context['form'] = form
@@ -133,9 +137,9 @@ def edit_account_view(request, *args, **kwargs):
                     "id": account.pk,
                     "email": account.email,
                     "username": account.username,
-                    # "fname": account.fname,
-                    # "lname": account.lname,
-                    # "bio": account.bio,
+                    "fname": account.fname,
+                    "lname": account.lname,
+                    "bio": account.bio,
                 })
         context['form'] = form
 

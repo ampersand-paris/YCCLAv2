@@ -11,7 +11,14 @@
     padding: 1vH 2vW;
     background-color: var(--cream);
   }
+
+  .bg-blue {
+      background-color: var(--main-blue);
+  }
   
+  .cream-text {
+      color: var(--cream);
+  }
   /* === FONTS === */
   
   h1 {
@@ -34,10 +41,16 @@
     text-transform: uppercase;
   }
   p {
-    font-family: century-gothic,sans-serif;
+    font-family: century-gothic, sans-serif;
     font-weight: 700;
     font-style: normal;
     color: var(--main-blue);
+  }
+
+  li {
+    font-family: century-gothic, sans-serif;
+    font-weight: 700;
+    font-style: normal;
   }
 
   a {
@@ -46,7 +59,7 @@
   }
 
   label {
-    font-family: century-gothic,sans-serif;
+    font-family: century-gothic, sans-serif;
     font-weight: 700;
     font-style: normal;
     color: var(--main-blue);
@@ -111,6 +124,10 @@
   
   .red-border {
     border: 2px solid var(--main-red);
+  }
+
+  .cream-border {
+    border: 2px solid var(--cream);
   }
   
   /* === BUTTONS === */
