@@ -1,4 +1,5 @@
 from django.urls import path
+
 from test_kitchen.views import (
     test_kitchen_list,
     test_kitchen_create,
