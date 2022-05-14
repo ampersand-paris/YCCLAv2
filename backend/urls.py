@@ -24,12 +24,8 @@ from accounts.views import(
     logout_view,
 )
 
-from main_app.views import (
-	home_screen_view
-)
-
 urlpatterns = [
-    path('', home_screen_view, name='home'),
+    path('', include('main_app.urls', namespace="home")),
     path('admin/', admin.site.urls),
     path('account/', include('accounts.urls', namespace="account")),
     path('login/', login_view, name='login'),

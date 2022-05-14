@@ -2,9 +2,9 @@
 	<h1>You Can Cook Literally Anything</h1>
 </div>
 <nav class="flex space-btwn padding red-border"> 
-	<a class="" href="{% url 'home' %}"><h2>About</h2></a>
-	<a class="" href=""><h2>Summer 2022 Set</h2></a>
-	<a class="" href=""><h2>Recipes</h2></a>
+	<a class="" href="{% url 'home:about' %}"><h2>About</h2></a>
+	<a class="" href="{% url 'home:summer' %}"><h2>Summer 2022 Set</h2></a>
+	<a class="" href="{% url 'home:recipes' %}"><h2>Recipes</h2></a>
 	{% if request.user.is_authenticated %}
 		{% if request.user.is_recipe_tester %}
 			<a class="" href="{% url 'test-kitchen:list' %}"><h2>Test Kitchen</h2></a>
