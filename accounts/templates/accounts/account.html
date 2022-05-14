@@ -3,9 +3,9 @@
 
 {% block body %}
 
-<div class="flex margin-top space-btwn">
-    <div class="flex double-border bg-blue cream-border">
-        <div class="prof-height flex column space-btwn padding bg-blue cream-border">
+<div class="flex margin-top space-btwn full-width">
+    <div class="double-border bg-blue cream-border">
+        <div class="prof-height prof-width flex column space-btwn padding bg-blue cream-border">
             <div>
                 <h3 class="cream-text">{{fname}} {{lname}}</h3>
                 <h4 class="cream-text margin-top">Email</h4>
@@ -32,29 +32,148 @@
             {% endif %}
         </div>
     </div>
-    {% if request.user.is_recipe_tester %}
-    <div class="cream-border double-border bg-blue">
-        <div class="prof-post-view flex column bg-blue cream-border padding">  
-            <div class="flex space-btwn  al-center">
-                <h2 class="cream-text">My Posts</h2> 
-                <a  class="" href="{% url 'test-kitchen:create' %}"><button class="stnd-bttn red-border bg-cream padding margin-top">New Post</button></a>
+    <div class="flex column">
+        <div class="flex space-btwn sixty">
+            <div class="tab-red flex al-center pointer">
+                <h2 onClick={toggleTab(id)} id="postcards" class="no-margin">My Postcards</h2>
             </div>
-            {% for post in posts %}
-                {% if post.user.pk == user.pk %}
-                <div class="padding margin-top bg-cream red-border">
-                    <div class="flex space-btwn">
-                        <h2>{{ post.title }}</h2>
-                        <p> {{ post.date }}</p>
+            {% if user.is_recipe_tester %}
+            <div class="tab-blue flex al-center pointer">
+                <h2 onClick={toggleTab(id)} id="posts" class="no-margin">My Posts</h2>
+            </div>
+            {% endif %}
+        </div> 
+        <div class="red-border-three prof-tab-height column" style="display: none" id="postcards-tab">
+            <div class="flex space-btwn">
+                <div class="tab-red-left"></div>
+                <div class="tab-red-right"></div>
+            </div>
+            <!-- UPDATE FORM  -->
+            {% for postcard in postcards %}
+            <form>
+                <div>                
+                    <p>{{ postcard.recipe }}</p>
+                    <div class="flex space-btwn ">
+                        <p class="no-margin">Sent to: {{ postcard.sent_to}}</p>
+                        <div class="flex">
+                            <p class="no-margin">Sent:</p>
+                            {% if postcard.sent %}
+                                <input  
+                                    class="margin-top"
+                                    type="checkbox"
+                                    name="received"
+                                    checked
+                                >
+                            {% else %}
+                                <input  
+                                    class="margin-top"
+                                    type="checkbox"
+                                    name="received"
+                                >
+                            {% endif %}
+                        </div>
                     </div>
-                    <p> {{ post.post }}</p>
-                    <a  href="../../test-kitchen/{{post.pk}}/update/"><button class="prof-bttn red-border padding margin-top">Edit post</button></a>
+                    <div class="flex space-btwn">
+                        <p class="no-margin">Received: {{ postcard.recieved_from }}</p>
+                        <div class="flex">
+                            <p class="no-margin">Recieved:</p>
+                            {% if postcard.received %}
+                                <input  
+                                    class="margin-top"
+                                    type="checkbox"
+                                    name="received"
+                                    checked
+                                >
+                            {% else %}
+                                <input  
+                                    class="margin-top"
+                                    type="checkbox"
+                                    name="received"
+                                >
+                            {% endif %}
+                        </div>
+                    </div>
                 </div>
-                {% endif %}
+            </form>
             {% endfor %}
-        {% endif %}
+            <!-- CREATE FORM  -->
+            <form class="flex column red-border" method="POST">
+                {% csrf_token %}
+                <div class="flex">
+                    <p class="flex space-btwn margin-top">Add to my collection: </p>
+                    <select class="margin-top" name="recipe">
+                        {% for recipe in recipes %}
+                        <option>{{ recipe.title }}</option>
+                        {% endfor %}
+                    </select>   
+                </div>
+                <div class="flex">
+                    <p class="flex space-btwn baseline">Sent</p>
+                    <input  
+                        class="margin-top"
+                        type="checkbox"
+                        name="sent"
+                    >
+             
+                    <p class="flex space-btwn baseline">Sent to:</p>
+                    <input  
+                        class="margin-top"
+                        type="textarea"
+                        name="sent_to"
+                        placeholder="Please share your experience"
+                    >       
+                </div>
+                <div class="flex">
+                    <p class="flex space-btwn baseline">Received</p>
+                    <input  
+                        class="margin-top"
+                        type="checkbox"
+                        name="received"
+                    >
+                    <p class="flex space-btwn baseline">Received from:</p>
+                    <input  
+                        class="margin-top"
+                        type="text"
+                        name="received_from"
+                        placeholder="Please share your experience"
+                    >    
+                </div>
+                <input  
+                    value="{{request.user.pk}}"
+                    type="hidden"
+                    name="user"
+                >
+                <button class="stnd-bttn red-border padding margin-top" type="submit">New Recipe Collected</button>
+            </form>
         </div>
-	</div>
-
+        <div>
+            {% if request.user.is_recipe_tester %}
+            <div class="bg-blue red-border-three prof-tab-height column" style="display: flex"  id="posts-tab">
+                <div class="flex space-btwn">
+                    <div class="tab-blue-left"></div>
+                    <div class="tab-blue-right"></div>
+                </div>
+                <div class="flex column cream-border padding">  
+                    <div class="flex space-btwn  al-center">
+                        <a  class="" href="{% url 'test-kitchen:create' %}"><button class="stnd-bttn red-border bg-cream padding margin-top">New Post</button></a>
+                    </div>
+                    {% for post in posts %}
+                        {% if post.user.pk == user.pk %}
+                        <div class="padding margin-top bg-cream red-border">
+                            <div class="flex space-btwn">
+                                <h2>{{ post.title }}</h2>
+                                <p> {{ post.date }}</p>
+                            </div>
+                            <p> {{ post.post }}</p>
+                            <a  href="../../test-kitchen/{{post.pk}}/update/"><button class="prof-bttn red-border padding margin-top">Edit post</button></a>
+                        </div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
 </div>
 
 {% endblock body %}

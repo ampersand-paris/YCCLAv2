@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from accounts.models import CustomUser
+from accounts.models import CustomUser, RecipeCollection
 
 # Register your models here.
 
@@ -15,3 +15,4 @@ class AccountAdmin(UserAdmin):
     fieldsets = ()
 
 admin.site.register(CustomUser, AccountAdmin)
+admin.site.register(RecipeCollection)

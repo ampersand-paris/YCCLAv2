@@ -2,7 +2,7 @@ from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import authenticate
 
-from accounts.models import CustomUser
+from accounts.models import CustomUser, RecipeCollection
 
 class RegistrationForm(UserCreationForm):
 
@@ -75,3 +75,9 @@ class AccountUpdateForm(forms.ModelForm):
         if commit:
             account.save()
         return account
+
+class RecipeCollectionCreate(forms.ModelForm):
+
+    class Meta:
+        model = RecipeCollection
+        fields = ('recipe', 'sent', 'sent_to', 'received', 'received_from', 'user')

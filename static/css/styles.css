@@ -23,6 +23,13 @@
   .cream-text {
       color: var(--cream);
   }
+  
+  /* === CURSOR === */
+
+  .pointer {
+    cursor: pointer;
+  }
+  
   /* === FONTS === */
   
   h1 {
@@ -171,10 +178,23 @@
     padding: 3px;
   }
   
+  .sixty {
+    width: 70vW;
+  }
+
+  .full-width {
+    width: 96vW;
+  }
+
 /* ====== PROFILE SPACING ====== */
 
         .prof-height {
             height: 75vH;
+            overflow: scroll;
+        }
+
+        .prof-width {
+          width: 20vW; 
         }
         
         .prof-post-view {
@@ -195,6 +215,18 @@
   
   .red-border {
     border: 2px solid var(--main-red);
+  }
+
+  .red-border-three {
+    border-left: 2px solid var(--main-red);
+    border-bottom: 2px solid var(--main-red);
+    border-right: 2px solid var(--main-red);
+  }
+
+  .cream-border-three {
+    border-left: 2px solid var(--cream);
+    border-bottom: 2px solid var(--cream);
+    border-right: 2px solid var(--cream);
   }
 
   .cream-border {
@@ -251,3 +283,53 @@
   .image-height {
     max-height: 80vH !important;
 }
+
+  /* === PROFILE === */
+
+  .tab-red {
+    border-top: 2px solid var(--main-red);
+    border-left: 2px solid var(--main-red);
+    border-right: 2px solid var(--main-red);
+    width: 30vW;
+    height: 5vH;
+    padding: .5vH 2vW;
+  }
+
+  .tab-red-left {
+    width: 30vW;
+  }
+
+  .tab-red-right {
+    border-top: 2px solid var(--main-red);
+    height: 1px;
+    width: calc(36vW - 4px);
+  }
+  .tab-blue {
+    border-top: 2px solid var(--main-red);
+    border-left: 2px solid var(--main-red);
+    border-right: 2px solid var(--main-red);
+    /* border-top: 2px solid var(--main-cream);
+    border-left: 2px solid var(--main-cream);
+    border-right: 2px solid var(--main-cream);
+    border-bottom: 2px solid var(--main-blue); */
+    background-color: var(--main-blue);
+    color: var(--cream);
+    width: 30vW;
+    height: 5vH;
+    padding: .5vH 2vW;
+  }
+
+  .tab-blue-right {
+    width: 30vW;
+  }
+
+  .tab-blue-left {
+    border-top: 2px solid var(--main-red);
+    height: 1px;
+    width: calc(36vW - 4px);
+  }
+
+  .prof-tab-height {
+    height: 70vH;
+    overflow: scroll;
+  }

@@ -1,11 +1,12 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
-from accounts.forms import RegistrationForm, AccountAuthenticationForm, AccountUpdateForm
+from accounts.forms import RegistrationForm, AccountAuthenticationForm, AccountUpdateForm, RecipeCollectionCreate
 from django.conf import settings
 
 from accounts.models import CustomUser
 from test_kitchen.models import TestKitchenPost
+from .models import Recipe, RecipeCollection
 
 # Create your views here.
 
@@ -83,12 +84,13 @@ def account_view(request, *args, **kwargs):
         context['bio'] = account.bio
         context['fname'] = account.fname
         context['lname'] = account.lname
-        context['posts'] = TestKitchenPost.objects.all()
-
+        context['posts'] = TestKitchenPost.objects.filter(user=account.id)
+        context['postcards'] = RecipeCollection.objects.filter(user=account.id)
 
         is_self = True
         is_friend = False
         user = request.user
+
         if user.is_authenticated and user != account: 
             is_self = False
         elif not user.is_authenticated:
@@ -97,8 +99,24 @@ def account_view(request, *args, **kwargs):
         context['is_self'] = is_self
         context['is_friend'] = is_friend
         context['BASE_URL'] = settings.BASE_URL
+    
+    if not user.is_authenticated:
+        return redirect('login')
+    else:        
+        context['recipes'] = Recipe.objects.all()
 
-        return render(request, "accounts/account.html", context)
+        if request.POST:
+            form = RecipeCollectionCreate(request.POST)
+            print(form)
+            if form.is_valid():
+                form.save()
+                print('success')
+                destination = get_redirect_if_exists(request)
+                if destination:
+                    return redirect(destination)
+            return redirect('account:view', user_id=user.pk)
+
+    return render(request, "accounts/account.html", context)
 
 def edit_account_view(request, *args, **kwargs):
 
@@ -115,7 +133,6 @@ def edit_account_view(request, *args, **kwargs):
     context = {}
     if request.POST:
         form = AccountUpdateForm(request.POST, instance=request.user)
-        print(form)
         if form.is_valid():
             form.save()
             return redirect('account:view', user_id=account.pk)

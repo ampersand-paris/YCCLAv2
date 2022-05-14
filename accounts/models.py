@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from main_app.models import Recipe
 
 class AccountManager(BaseUserManager):
 
@@ -57,3 +58,12 @@ class CustomUser(AbstractBaseUser):
 
     def has_module_perms(self, app_label):
         return True
+
+class RecipeCollection(models.Model):
+    recipe = models.CharField(max_length=100)
+    sent = models.BooleanField(default=False, blank=True)
+    sent_to = models.CharField(max_length=50, blank=True)
+    received = models.BooleanField(default=False, blank=True)
+    received_from = models.CharField(max_length=50, blank=True)
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+

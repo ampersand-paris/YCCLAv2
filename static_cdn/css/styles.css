@@ -15,10 +15,21 @@
   .bg-blue {
       background-color: var(--main-blue);
   }
+
+  .bg-cream {
+    background-color: var(--cream) !important;
+}
   
   .cream-text {
       color: var(--cream);
   }
+  
+  /* === CURSOR === */
+
+  .pointer {
+    cursor: pointer;
+  }
+  
   /* === FONTS === */
   
   h1 {
@@ -40,6 +51,27 @@
     font-size: 2em;
     text-transform: uppercase;
   }
+
+  h3 {
+    font-family: bilo, sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    font-size: 1.5em;
+    text-transform: uppercase;
+  }
+
+  h4 {
+    font-family: bilo, sans-serif;
+    font-style: italic;
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
+    font-size: 1em;
+    text-transform: uppercase;
+  }
+
   p {
     font-family: century-gothic, sans-serif;
     font-weight: 700;
@@ -47,6 +79,11 @@
     color: var(--main-blue);
   }
 
+  ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+  }
   li {
     font-family: century-gothic, sans-serif;
     font-weight: 700;
@@ -70,6 +107,23 @@
     color: var(--main-blue);
   }
   
+  .garamond {
+    font-family: adobe-garamond-pro, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2.5em;
+    text-transform: lowercase;
+  }
+
+  .HWT {
+    font-family: hwt-slab-antique,serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2.5em;
+    letter-spacing: 5px;
+    line-height: 35px;
+    width: 65%;
+  }
   /* === SPACING === */
   
   .flex {
@@ -95,7 +149,7 @@
   .page-height {
     height: 80vH;
   }
-  
+
   .center {
     justify-content: center;
   }
@@ -112,6 +166,10 @@
     margin-top: 2vH;
   }
   
+  .no-margin {
+      margin: 0;
+      padding: 0;
+  }
   .extra-padding {
     padding: 10vH 5vW
   }
@@ -120,7 +178,40 @@
     padding: 3px;
   }
   
-  /* === BORDERS === */
+  .sixty {
+    width: 70vW;
+  }
+
+  .full-width {
+    width: 96vW;
+  }
+
+/* ====== PROFILE SPACING ====== */
+
+        .prof-height {
+            height: 75vH;
+            overflow: scroll;
+        }
+
+        .prof-width {
+          width: 20vW; 
+        }
+        
+        .prof-post-view {
+            width: 60vW;
+        }
+
+/* ====== RECIPE SPACING ====== */
+
+        .prof-height {
+            height: 75vH;
+        }
+        
+        .recipe-detail {
+            width: 50vW;
+        }
+
+/* === BORDERS === */
   
   .red-border {
     border: 2px solid var(--main-red);
@@ -143,6 +234,17 @@
     text-transform: uppercase;
   }
   
+  .prof-bttn {
+    background-color: var(--cream);
+    /* border: none; */
+    color: var(--main-blue);
+    font-family: bilo, sans-serif;
+    font-style: italic;
+    font-size: 1em;
+    font-weight: 700;
+    text-transform: uppercase;
+    width: 20vW;
+  }
   /* === FORMS === */
   
   input {
@@ -163,3 +265,25 @@
     outline: none;
   }
   
+  .image-width {
+    max-width: 30vW;
+  }
+  .image-height {
+    max-height: 80vH !important;
+}
+
+  /* === PROFILE === */
+
+  .tab {
+    border-top: 2px solid var(--main-red);
+    border-left: 2px solid var(--main-red);
+    border-right: 2px solid var(--main-red);
+    width: 30vW;
+    height: 5vH;
+    padding: .5vH 2vW;
+  }
+
+  .prof-tab-height {
+    height: 70vH;
+    overflow: scroll;
+  }

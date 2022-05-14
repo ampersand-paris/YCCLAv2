@@ -44,6 +44,7 @@ def test_kitchen_create(request, *args, **kwargs):
         if form.is_valid():
             form.save()
             print('success')
+            print(form)
             destination = get_redirect_if_exists(request)
             if destination:
                 return redirect(destination)
@@ -109,4 +110,3 @@ def test_kitchen_delete(request, pk):
         
         return redirect('account:view', user_id=user_id)
     
-    return render(request)
