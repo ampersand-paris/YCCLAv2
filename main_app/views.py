@@ -16,10 +16,16 @@ def home_screen_view(request):
 	return render(request, "home.html", context)
 
 def recipe_search(request,  *args):
-
-    context = {}
-    context['recipes'] = Recipe.objects.all()
-    return render(request, "RecipesList.html", context)
+    if request.method == "POST":
+        searched = request.POST['searched']
+        context = {}
+        context['recipes'] = Recipe.objects.filter(title__icontains=searched)
+        context['searched'] = searched
+        return render(request, "RecipesList.html", context)
+    else: 
+        context = {}
+        context['recipes'] = Recipe.objects.all()
+        return render(request, "RecipesList.html", context)
 
 class RecipeDetail(DetailView):
     model = Recipe
