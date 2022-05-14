@@ -4,20 +4,44 @@
 {% block body %}
 
 <div class="flex margin-top space-btwn">
-    <h1>Recipes View</h1>
+    <form method="post">
+        {% csrf_token %}
+        <input type="search" name="searched" placeholder="Search our recipes">
+        <button type="submit">Search</button>
+    </form>
     <div class="cream-border double-border bg-blue">
         <div class="prof-post-view flex column bg-blue cream-border padding">  
             <div class="flex space-btwn  al-center">
                 <h2 class="cream-text">Recipes</h2> 
             </div>
-            {% for recipe in recipes %}
+            {% if searched %}
+                {% if recipes %}
+                {% for recipe in recipes %}
+                    <p class="cream-text">Recipes including '{{ searched }}'</p>
+                    <div class="padding margin-top bg-cream red-border">
+                        <div class="flex space-btwn">
+                            <h2>{{ recipe.title }}</h2>
+                        </div>
+                        <a  class="" href="./{{recipe.pk}}/"><button>Full Recipe</button></a> 
+                    </div>
+                {% endfor %}
+                {% else %}
                 <div class="padding margin-top bg-cream red-border">
                     <div class="flex space-btwn">
-                        <h2>{{ recipe.title }}</h2>
+                        <p>We are sorry, but no recipes match your search: {{ searched }}.</p>
                     </div>
-                    <a  class="" href="./{{recipe.pk}}/"><button>Read More</button></a> 
                 </div>
-            {% endfor %}
+                {% endif %}
+            {% else %}
+                {% for recipe in recipes %}
+                    <div class="padding margin-top bg-cream red-border">
+                        <div class="flex space-btwn">
+                            <h2>{{ recipe.title }}</h2>
+                        </div>
+                        <a  class="" href="./{{recipe.pk}}/"><button>Read More</button></a> 
+                    </div>
+                {% endfor %}
+            {% endif %}
         </div>
 	</div>
 

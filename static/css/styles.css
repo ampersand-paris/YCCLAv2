@@ -72,6 +72,11 @@
     color: var(--main-blue);
   }
 
+  ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+  }
   li {
     font-family: century-gothic, sans-serif;
     font-weight: 700;
@@ -95,6 +100,23 @@
     color: var(--main-blue);
   }
   
+  .garamond {
+    font-family: adobe-garamond-pro, serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2.5em;
+    text-transform: lowercase;
+  }
+
+  .HWT {
+    font-family: hwt-slab-antique,serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 2.5em;
+    letter-spacing: 5px;
+    line-height: 35px;
+    width: 65%;
+  }
   /* === SPACING === */
   
   .flex {
@@ -159,6 +181,16 @@
             width: 60vW;
         }
 
+/* ====== RECIPE SPACING ====== */
+
+        .prof-height {
+            height: 75vH;
+        }
+        
+        .recipe-detail {
+            width: 50vW;
+        }
+
 /* === BORDERS === */
   
   .red-border {
@@ -213,3 +245,9 @@
     outline: none;
   }
   
+  .image-width {
+    max-width: 30vW;
+  }
+  .image-height {
+    max-height: 80vH !important;
+}

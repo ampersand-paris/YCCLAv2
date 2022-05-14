@@ -3,32 +3,35 @@
 
 {% block body %}
 
-<div class="flex margin-top space-btwn">
-    <h1>Recipes View</h1>
-    <div class="cream-border double-border bg-blue">
-        <div class="prof-post-view flex column bg-blue cream-border padding">  
-            <div class="flex space-btwn  al-center">
-                <h2 class="cream-text">Recipes</h2> 
+<div class="margin-top cream-border double-border" style="background-color: {{ recipe.background_color }}">
+    <div class="cream-border">
+        <div class="flex space-btwn padding" style="background-color: {{ recipe.bacgkround_color }}">  
+            <div class="flex space-btwn al-center">
+                <img class="image-width image-height" src="{{ recipe.image.url }}" />
             </div>
-                <div class="padding margin-top bg-cream red-border">
-                    <div class="flex space-btwn">
-                        <h2>{{ recipe.title }}</h2>
-                        <ul>
-                            {% for ingredient in recipe.ingredients %}
-                            <li>{{ ingredient }}</li>
-                            {% endfor %}
-                        </ul>
-                        <ul>
-                            {% for step in recipe.preparation %}
-                            <p>{{ forloop.counter }}. {{ step }}</p>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <a  class="" href="./{{recipe.pk}}/"><button>Read More</button></a> 
+            <div class="padding recipe-detail margin-top">
+                <div class="flex column padding space-btwn bg-cream" style="border: 2px solid {{ recipe.secondary_color }}">
+                    <h1 class="margin-top HWT"  style="color: {{ recipe.secondary_color }}">{{ recipe.title }}</h1>    
+                    <h2 class="garamond" style="color: {{ recipe.secondary_color }}">ingredients</h2>    
+                    <ul>
+                        {% for ingredient in recipe.ingredients %}
+                        <li style="color: {{ recipe.background_color }} !important">{{ ingredient }}</li>
+                        {% endfor %}
+                    </ul>
+                    <h2 class="garamond margin-top" style="color: {{ recipe.secondary_color }}">directions</h2>    
+                    <ul>
+                        {% for step in recipe.preparation %}
+                            {% if forloop.counter == 1 %}
+                                <p class="no-margin" style="color: {{ recipe.bacgkround_color }}">{{ forloop.counter }}. {{ step }}</p>
+                            {% else %}
+                                <p class="margin-top" style="color: {{ recipe.bacgkround_color }}">{{ forloop.counter }}. {{ step }}</p>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
                 </div>
+            </div>
         </div>
 	</div>
-
 </div>
 
 {% endblock body %}
