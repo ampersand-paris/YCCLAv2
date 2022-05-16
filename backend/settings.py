@@ -28,6 +28,9 @@ SECRET_KEY = str(os.getenv('SECRET_KEY'))
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+# FOR DEVELOPMENT ONLY
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ALLOWED_HOSTS = []
 
 AUTH_USER_MODEL = "accounts.CustomUser"
