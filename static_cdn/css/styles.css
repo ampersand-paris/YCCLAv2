@@ -23,6 +23,10 @@
   .cream-text {
       color: var(--cream);
   }
+
+  .red-text {
+    color: var(--main-red);
+  }
   
   /* === CURSOR === */
 

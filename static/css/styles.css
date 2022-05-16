@@ -186,8 +186,16 @@
     width: 70vW;
   }
 
+  .third {
+    width: 30vW;
+  }
+
   .full-width {
     width: 96vW;
+  }
+
+  .auto {
+    height: auto;
   }
 
 /* ====== PROFILE SPACING ====== */
