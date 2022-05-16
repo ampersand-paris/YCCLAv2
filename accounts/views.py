@@ -27,7 +27,7 @@ def register_view(request, *args, **kwargs):
             destination = get_redirect_if_exists(request)
             if destination:
                 return redirect(destination)
-            return redirect('home') #redirects to url with the name 'home' in backend/urls.py
+            return redirect('home:recipes') #redirects to url with the name 'home' in backend/urls.py
 
         else: 
             context['registration_form'] = form
@@ -36,14 +36,14 @@ def register_view(request, *args, **kwargs):
 
 def logout_view(request):
     logout(request)
-    return redirect('home')
+    return redirect('home:about')
 
 def login_view(request, *args, **kwargs):
     context = {}
 
     user = request.user
     if user.is_authenticated:
-        return redirect('home')
+        return redirect('account:view', user_id=user.pk)
     
     destination = get_redirect_if_exists(request)
     if request.POST:
@@ -56,7 +56,7 @@ def login_view(request, *args, **kwargs):
                 login(request, user)
                 if destination:
                     return redirect(destination)
-                return redirect('home')
+                return redirect('account:view', user_id=user.pk)
         else:
             context['login_form'] = form
     return render(request, "accounts/login.html", context)
