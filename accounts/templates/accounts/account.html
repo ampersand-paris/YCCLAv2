@@ -34,121 +34,141 @@
     </div>
     <div class="flex column">
         <div class="flex space-btwn sixty">
+            {% if user.is_recipe_tester %}
             <div class="tab-red flex al-center pointer">
                 <h2 onClick={toggleTab(id)} id="postcards" class="no-margin">My Postcards</h2>
             </div>
+            {% else %}
+            <div class="tab-red flex al-center">
+                <h2 class="no-margin">My Postcards</h2>
+            </div>
+            {% endif %}
             {% if user.is_recipe_tester %}
             <div class="tab-blue flex al-center pointer">
                 <h2 onClick={toggleTab(id)} id="posts" class="no-margin">My Posts</h2>
             </div>
             {% endif %}
         </div> 
-        <div class="red-border-three prof-tab-height column" style="display: none" id="postcards-tab">
+        <div class="red-border-three prof-tab-height column" id="postcards-tab">
             <div class="flex space-btwn">
                 <div class="tab-red-left"></div>
                 <div class="tab-red-right"></div>
             </div>
+            <!-- CREATE FORM  -->
+            <form class="flex padding space-btwn" method="POST">
+                {% csrf_token %}
+                <div class="flex column">
+                    <div class="flex al-center">
+                        <p class="flex space-btwn margin-top">Add to my collection: </p>
+                        <select class="margin-left" name="recipe">
+                            {% for recipe in recipes %}
+                            <option>{{ recipe.title }}</option>
+                            {% endfor %}
+                        </select>   
+                    </div>
+                    <div class="flex baseline">
+                        <label class="container">Sent
+                            <input  
+                                class="container-input"
+                                type="checkbox"
+                                name="sent"
+                            >
+                            <span class="checkmark"></span>
+                        </label>
+                            <p class="flex space-btwn baseline no-margin">Sent to:</p>
+                            <input  
+                                class="margin-left"
+                                type="textarea"
+                                name="sent_to"
+                                placeholder="Please share your experience"
+                            >     
+                    </div>
+                    <div class="flex baseline no-margin">
+                        <label class="container">Received
+                            <input  
+                                class="container-input"
+                                type="checkbox"
+                                name="received"
+                            >
+                            <span class="checkmark"></span>
+                        </label>
+                        <p class="flex space-btwn baseline no-margin">Received from:</p>
+                        <input  
+                            class="margin-left"
+                            type="text"
+                            name="received_from"
+                            placeholder="Please share your experience"
+                        >    
+                    </div>
+                    <input  
+                        value="{{request.user.pk}}"
+                        type="hidden"
+                        name="user"
+                    >
+                </div>
+                <div class="flex flex-end">
+                        <button class="prof-bttn red-border margin-top" type="submit">New Recipe Collected</button>
+                </div>
+            </form>
             <!-- UPDATE FORM  -->
             {% for postcard in postcards %}
-            <form>
-                <div>                
-                    <p>{{ postcard.recipe }}</p>
-                    <div class="flex space-btwn ">
-                        <p class="no-margin">Sent to: {{ postcard.sent_to}}</p>
-                        <div class="flex">
-                            <p class="no-margin">Sent:</p>
-                            {% if postcard.sent %}
-                                <input  
-                                    class="margin-top"
-                                    type="checkbox"
-                                    name="received"
-                                    checked
-                                >
-                            {% else %}
-                                <input  
-                                    class="margin-top"
-                                    type="checkbox"
-                                    name="received"
-                                >
-                            {% endif %}
-                        </div>
-                    </div>
-                    <div class="flex space-btwn">
-                        <p class="no-margin">Received: {{ postcard.recieved_from }}</p>
-                        <div class="flex">
-                            <p class="no-margin">Recieved:</p>
-                            {% if postcard.received %}
-                                <input  
-                                    class="margin-top"
-                                    type="checkbox"
-                                    name="received"
-                                    checked
-                                >
-                            {% else %}
-                                <input  
-                                    class="margin-top"
-                                    type="checkbox"
-                                    name="received"
-                                >
-                            {% endif %}
-                        </div>
-                    </div>
-                </div>
-            </form>
-            {% endfor %}
-            <!-- CREATE FORM  -->
-            <form class="flex column red-border" method="POST">
+            <form class="flex padding space-btwn">
                 {% csrf_token %}
-                <div class="flex">
-                    <p class="flex space-btwn margin-top">Add to my collection: </p>
-                    <select class="margin-top" name="recipe">
-                        {% for recipe in recipes %}
-                        <option>{{ recipe.title }}</option>
-                        {% endfor %}
-                    </select>   
+                <div class="flex column">                
+                    <p class="HWT-small no-margin">{{ postcard.recipe }}</p>
+                    <div class="flex baseline">
+                        {% if postcard.sent %}
+                        <label class="container">Sent
+                            <input  
+                                class="container-input"
+                                type="checkbox"
+                                name="sent"
+                                checked
+                            >
+                            <span class="checkmark"></span>
+                        </label>
+                        {% else %}
+                        <label class="container">Sent
+                            <input  
+                                class="container-input"
+                                type="checkbox"
+                                name="sent"
+                            >
+                            <span class="checkmark"></span>
+                        </label>
+                        {% endif %}
+                        <p class="no-margin">Sent to: {{ postcard.sent_to}}</p>
+                    </div>
+                    <div class="flex baseline">
+                        {% if postcard.received %}
+                            <label class="container">Received
+                                <input  
+                                    class="container-input"
+                                    type="checkbox"
+                                    name="received"
+                                    checked
+                                >
+                                <span class="checkmark"></span>
+                            </label>
+                        {% else %}
+                            <label class="container">Received
+                                <input  
+                                    class="container-input"
+                                    type="checkbox"
+                                    name="received"
+                                >
+                                <span class="checkmark"></span>
+                            </label>
+                        {% endif %}
+                        <p class="no-margin">Received from: {{ postcard.received_from }}</p>
+                    </div>
                 </div>
-                <div class="flex">
-                    <p class="flex space-btwn baseline">Sent</p>
-                    <input  
-                        class="margin-top"
-                        type="checkbox"
-                        name="sent"
-                    >
-             
-                    <p class="flex space-btwn baseline">Sent to:</p>
-                    <input  
-                        class="margin-top"
-                        type="textarea"
-                        name="sent_to"
-                        placeholder="Please share your experience"
-                    >       
-                </div>
-                <div class="flex">
-                    <p class="flex space-btwn baseline">Received</p>
-                    <input  
-                        class="margin-top"
-                        type="checkbox"
-                        name="received"
-                    >
-                    <p class="flex space-btwn baseline">Received from:</p>
-                    <input  
-                        class="margin-top"
-                        type="text"
-                        name="received_from"
-                        placeholder="Please share your experience"
-                    >    
-                </div>
-                <input  
-                    value="{{request.user.pk}}"
-                    type="hidden"
-                    name="user"
-                >
-                <button class="stnd-bttn red-border padding margin-top" type="submit">New Recipe Collected</button>
             </form>
+            {% endfor %}            
         </div>
         <div>
             {% if request.user.is_recipe_tester %}
-            <div class="bg-blue red-border-three prof-tab-height column" style="display: flex"  id="posts-tab">
+            <div class="bg-blue red-border-three prof-tab-height column" style="display: none"  id="posts-tab">
                 <div class="flex space-btwn">
                     <div class="tab-blue-left"></div>
                     <div class="tab-blue-right"></div>
