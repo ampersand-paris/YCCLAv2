@@ -22,9 +22,9 @@
                     <ul>
                         {% for step in recipe.preparation %}
                             {% if forloop.counter == 1 %}
-                                <p class="no-margin" style="color: {{ recipe.bacgkround_color }}">{{ forloop.counter }}. {{ step }}</p>
+                                <p class="no-margin" style="color: {{ recipe.background_color }}">{{ forloop.counter }}. {{ step }}</p>
                             {% else %}
-                                <p class="margin-top" style="color: {{ recipe.bacgkround_color }}">{{ forloop.counter }}. {{ step }}</p>
+                                <p class="margin-top" style="color: {{ recipe.background_color }}">{{ forloop.counter }}. {{ step }}</p>
                             {% endif %}
                         {% endfor %}
                     </ul>

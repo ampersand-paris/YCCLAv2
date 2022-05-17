@@ -12,8 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
-import cloudinary
-import cloudinary_storage
+# import cloudinary
+# import cloudinary_storage
 
 if not os.environ.get('PRODUCTION'):
     from dotenv import load_dotenv
@@ -32,7 +32,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # FOR DEVELOPMENT ONLY
 if DEBUG:
@@ -71,6 +71,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'
 ]
 
 ROOT_URLCONF = 'backend.urls'
@@ -147,13 +148,13 @@ USE_TZ = True
 #     os.path.join(BASE_DIR, 'static'),
 # )
 
-CLOUDINARY_STORAGE = {
-    'CLOUD_NAME': str(os.getenv('CLOUD_NAME')),
-    'API_KEY': str(os.getenv('API_KEY')),
-    'API_SECRET': str(os.getenv('API_SECRET')),
-}
+# CLOUDINARY_STORAGE = {
+#     'CLOUD_NAME': str(os.getenv('CLOUD_NAME')),
+#     'API_KEY': str(os.getenv('API_KEY')),
+#     'API_SECRET': str(os.getenv('API_SECRET')),
+# }
 
-DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloundinaryStorage'
+# DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloundinaryStorage'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
@@ -163,11 +164,12 @@ STATICFILES_DIRS = [
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static_cdn')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
 
+# STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
-TEMP = os.path.join(BASE_DIR, 'media_cdn/temp')
+# TEMP = os.path.join(BASE_DIR, 'media_cdn/temp')
 
 # if in production, use production URL
 BASE_URL = "http://127.0.0.1:8000"
