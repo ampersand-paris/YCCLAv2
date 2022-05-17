@@ -3,9 +3,9 @@
 
 {% block body %}
 
-<div class="flex margin-top space-btwn">
-    <div class="flex double-border bg-blue cream-border">
-        <div class="prof-height flex column space-btwn padding bg-blue cream-border">
+<div class="flex margin-top space-btwn full-width">
+    <div class="double-border bg-blue cream-border">
+        <div class="prof-height prof-width flex column space-btwn padding bg-blue cream-border">
             <div>
                 <h3 class="cream-text">{{request.user.fname}} {{request.user.lname}}</h3>
                 <h4 class="cream-text margin-top">Email</h4>
@@ -31,7 +31,7 @@
                         <p> {{ post.date }} | {{ post.user.username }}</p>
                     </div>
                     <p> {{ post.post }}</p>
-                    <a  class="" href="./{{post.pk}}/"><button>Read More</button></a> 
+                    <a  c href="./{{post.pk}}/"><button class="prof-bttn red-border margin-top">Read More</button></a> 
                 </div>
             {% endfor %}
     {% endif %}

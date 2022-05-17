@@ -7,7 +7,7 @@
     <form method="post">
         {% csrf_token %}
         <input type="search" name="searched" placeholder="Search our recipes">
-        <button type="submit">Search</button>
+        <button class="prof-bttn red-border margin-top" type="submit">Search</button>
     </form>
     <div class="cream-border double-border bg-blue">
         <div class="prof-post-view flex column bg-blue cream-border padding">  
@@ -38,7 +38,7 @@
                         <div class="flex space-btwn">
                             <h2>{{ recipe.title }}</h2>
                         </div>
-                        <a  class="" href="./{{recipe.pk}}/"><button>Read More</button></a> 
+                        <a  href="./{{recipe.pk}}/"><button class="prof-bttn red-border margin-top">Full Recipe</button></a> 
                     </div>
                 {% endfor %}
             {% endif %}
