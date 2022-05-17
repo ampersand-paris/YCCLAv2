@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'accounts',
     'main_app',
     'test_kitchen',
+    'cloudinary',
+    'cloudinary_storage',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -142,6 +144,14 @@ USE_TZ = True
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, 'static'),
 # )
+
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': str(os.getenv('CLOUD_NAME')),
+    'API_KEY': str(os.getenv('API_KEY')),
+    'API_SECRET': str(os.getenv('API_SECRET')),
+}
+
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloundinaryStorage'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
