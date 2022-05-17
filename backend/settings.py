@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+import cloudinary
+import cloudinary_storage
 
 if not os.environ.get('PRODUCTION'):
     from dotenv import load_dotenv
