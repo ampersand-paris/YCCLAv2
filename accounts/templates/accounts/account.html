@@ -101,21 +101,54 @@
                         >    
                     </div>
                     <input  
-                        value="{{request.user.pk}}"
+                        value="{{id}}"
                         type="hidden"
                         name="user"
                     >
                 </div>
                 <div class="flex flex-end">
-                        <button class="prof-bttn red-border margin-top" type="submit">New Recipe Collected</button>
+                        <button class="prof-bttn red-border margin-top" type="submit" name="btn" value="Create">New Recipe Collected</button>
                 </div>
             </form>
             <!-- UPDATE FORM  -->
-            {% for postcard in postcards %}
-            <form class="flex padding space-btwn">
+            {% for postcard in postcards %} 
+            <div class="flex padding space-btwn" method="POST">
                 {% csrf_token %}
-                <div class="flex column">                
-                    <p class="HWT-small no-margin">{{ postcard.recipe }}</p>
+                <div class="flex column full">
+                    <p class="HWT-small no-margin" >{{ postcard.recipe }}</p>                
+                    <div class="flex baseline">
+                        {% if postcard.sent %}
+                        <label class="container">Sent
+                            <span class="checkmark-filled"></span>
+                        </label>
+                        {% else %}
+                        <label class="container">Sent
+                            <span class="checkmark-empty"></span>
+                        </label>
+                        {% endif %}
+                        <p class="no-margin">Sent to: {{ postcard.sent_to}}</p>
+                    </div>
+                    <div class="flex baseline">
+                        {% if postcard.received %}
+                            <label class="container">Received
+                                <span class="checkmark-filled"></span>
+                            </label>
+                        {% else %}
+                            <label class="container">Received
+                                <span class="checkmark-empty"></span>
+                            </label>
+                        {% endif %}
+                        <p class="no-margin">Received from: {{ postcard.received_from }}</p>
+                    </div>
+                </div>
+                <div class="flex flex-end">
+                    <a href="../update/{{postcard.pk}}/"><button class="prof-bttn red-border margin-top" type="submit">Update</button></a>
+                </div>
+            </div> 
+            <!-- <form class="flex padding space-btwn" method="POST">
+                {% csrf_token %}
+                <div class="flex column full">
+                    <p class="HWT-small no-margin" >{{ postcard.recipe }}</p>                
                     <div class="flex baseline">
                         {% if postcard.sent %}
                         <label class="container">Sent
@@ -137,7 +170,13 @@
                             <span class="checkmark"></span>
                         </label>
                         {% endif %}
-                        <p class="no-margin">Sent to: {{ postcard.sent_to}}</p>
+                        <p class="no-margin">Sent to: </p>
+                        <input  
+                            class="margin-left"
+                            type="text"
+                            name="sent_to"
+                            placeholder="{{ postcard.sent_to}}"
+                        > 
                     </div>
                     <div class="flex baseline">
                         {% if postcard.received %}
@@ -160,10 +199,24 @@
                                 <span class="checkmark"></span>
                             </label>
                         {% endif %}
-                        <p class="no-margin">Received from: {{ postcard.received_from }}</p>
+                        <p class="no-margin">Received from: </p>
+                        <input  
+                            class="margin-left"
+                            type="text"
+                            name="received_from"
+                            placeholder="{{ postcard.received_from }}"
+                        > 
                     </div>
                 </div>
-            </form>
+                <input  
+                    value="{{postcard.pk}}"
+                    type="hidden"
+                    name="id"
+                > 
+                <div class="flex flex-end">
+                    <button class="prof-bttn red-border margin-top" type="submit" name="btn" value="Update">Update</button>
+                </div>
+            </form> -->
             {% endfor %}            
         </div>
         <div>
@@ -173,7 +226,7 @@
                     <div class="tab-blue-left"></div>
                     <div class="tab-blue-right"></div>
                 </div>
-                <div class="flex column cream-border padding">  
+                <div class="flex column padding">  
                     <div class="flex space-btwn  al-center">
                         <a  class="" href="{% url 'test-kitchen:create' %}"><button class="stnd-bttn red-border bg-cream padding margin-top">New Post</button></a>
                     </div>

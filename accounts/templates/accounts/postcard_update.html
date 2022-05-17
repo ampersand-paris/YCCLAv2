@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+<div class="page-height flex center al-center">
+    <div class="double-border red-border fifty">
+        <form class="flex column padding red-border" method="POST">
+            {% csrf_token %}
+            <div class="flex column full">
+                <p class="HWT-small no-margin" >{{form.initial.recipe}}</p>                
+                <div class="flex baseline">
+                    {% if form.initial.sent %}
+                    <label class="container">Sent
+                        <input  
+                            class="container-input"
+                            type="checkbox"
+                            name="sent"
+                            checked
+                        >
+                        <span class="checkmark"></span>
+                    </label>
+                    {% else %}
+                    <label class="container">Sent
+                        <input  
+                            class="container-input"
+                            type="checkbox"
+                            name="sent"
+                        >
+                        <span class="checkmark"></span>
+                    </label>
+                    {% endif %}
+                    <p class="no-margin">Sent to: </p>
+                    <input  
+                        class="margin-left"
+                        type="text"
+                        name="sent_to"
+                        value="{{ form.initial.sent_to}}"
+                        placeholder="{{ form.initial.sent_to}}"
+                    > 
+                </div>
+                <div class="flex baseline">
+                    {% if form.initial.received %}
+                        <label class="container">Received
+                            <input  
+                                class="container-input"
+                                type="checkbox"
+                                name="received"
+                                checked
+                            >
+                            <span class="checkmark"></span>
+                        </label>
+                    {% else %}
+                        <label class="container">Received
+                            <input  
+                                class="container-input"
+                                type="checkbox"
+                                name="received"
+                            >
+                            <span class="checkmark"></span>
+                        </label>
+                    {% endif %}
+                    <p class="no-margin">Received from: </p>
+                    <input  
+                        class="margin-left"
+                        type="text"
+                        name="received_from"
+                        value="{{ form.initial.received_from }}"
+                        placeholder="{{ form.initial.received_from }}"
+                    > 
+                </div>
+            </div>
+            {% for field in login_form %}
+            {% for error in field.errors %}
+            {% if error == ' ' %}
+                <p style="display: none">{{ error }}</p>
+                {% else %}
+                <p style="color: red">{{ error }}</p>
+                {% endif %}
+            {% endfor %}
+            {% endfor %}
+            {% if form.non_field_errors %}
+                <div style="color: red">
+                    <p>{{form.non_field_errors}}</p>
+                </div>
+            {% endif %}
+            <div class="flex center">
+                <button class="prof-bttn red-border margin-top" type="submit" name="btn" value="Update">Update</button>
+            </div>
+        </form>
+        </form>
+    </div>
+</div>
+
+{% endblock body %}

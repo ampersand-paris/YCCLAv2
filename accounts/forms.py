@@ -81,3 +81,21 @@ class RecipeCollectionCreate(forms.ModelForm):
     class Meta:
         model = RecipeCollection
         fields = ('recipe', 'sent', 'sent_to', 'received', 'received_from', 'user')
+
+class RecipeCollectionUpdateForm(forms.ModelForm):
+
+    class Meta:
+        model = RecipeCollection
+        fields = ('sent', 'sent_to', 'received', 'received_from')
+
+    def save(self, commit=True):
+        collection = super(RecipeCollectionUpdateForm, self).save(commit=False)
+        collection.sent = self.cleaned_data['sent']
+        collection.sent_to = self.cleaned_data['sent_to']
+        collection.received = self.cleaned_data['received']
+        collection.received_from = self.cleaned_data['received_from']
+
+        if commit:
+            print('form save')
+            collection.save()
+        return collection

@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth import login, authenticate, logout
-from accounts.forms import RegistrationForm, AccountAuthenticationForm, AccountUpdateForm, RecipeCollectionCreate
+from accounts.forms import RegistrationForm, AccountAuthenticationForm, AccountUpdateForm, RecipeCollectionCreate, RecipeCollectionUpdateForm
 from django.conf import settings
 
 from accounts.models import CustomUser
@@ -100,13 +100,64 @@ def account_view(request, *args, **kwargs):
         context['is_friend'] = is_friend
         context['BASE_URL'] = settings.BASE_URL
     
+    # CREATE RECIPE COLLECTION
+    # if not user.is_authenticated:
+    #     return redirect('login')
+    # else:        
+    #     context['recipes'] = Recipe.objects.all()
+
+    #     if request.POST:
+    #         form = RecipeCollectionCreate(request.POST)
+    #         print(form)
+    #         if form.is_valid():
+    #             form.save()
+    #             print('success')
+    #             destination = get_redirect_if_exists(request)
+    #             if destination:
+    #                 return redirect(destination)
+    #         return redirect('account:view', user_id=user.pk)
+
+    # # CREATE RECIPE COLLECTION
     if not user.is_authenticated:
         return redirect('login')
     else:        
         context['recipes'] = Recipe.objects.all()
+        form = RecipeCollectionCreate(request.POST)
 
-        if request.POST:
-            form = RecipeCollectionCreate(request.POST)
+        if request.POST and not form.is_valid():
+            print('update')
+            # collection_id = pk
+            collection = RecipeCollection.objects.filter(user=account.id)
+            update_form = RecipeCollectionUpdateForm(request.POST)
+            if request.POST:
+                print('update', update_form)
+                if update_form.is_valid():
+                    print('view update')
+                    update_form.save()
+                    return redirect('account:view', user_id=user.pk)
+                # else: 
+                #     update_form = RecipeCollectionUpdateForm(request.POST, instance=request.user,
+                #         initial = {
+                #             "id": collection.pk,
+                #             "sent": collection.sent,
+                #             "sent_to": collection.sent_to,
+                #             "received": collection.received,
+                #             "received_from": collection.received_from,
+                #         }
+                #     )
+                    # context['form'] = form
+            # else: 
+            #     update_form = RecipeCollectionUpdateForm(
+            #             initial = {
+            #                 "id": collection.pk,
+            #                 "sent": collection.sent,
+            #                 "sent_to": collection.sent_to,
+            #                 "received": collection.received,
+            #                 "received_from": collection.received_from,
+            #             })
+            #     context['form'] = update_form
+        elif request.POST:
+            print('create')
             print(form)
             if form.is_valid():
                 form.save()
@@ -115,7 +166,10 @@ def account_view(request, *args, **kwargs):
                 if destination:
                     return redirect(destination)
             return redirect('account:view', user_id=user.pk)
-
+            # else:
+            #     form = RecipeCollectionCreate(prefix="create")
+        
+        
     return render(request, "accounts/account.html", context)
 
 def edit_account_view(request, *args, **kwargs):
@@ -161,3 +215,45 @@ def edit_account_view(request, *args, **kwargs):
         context['form'] = form
 
     return render(request, "accounts/edit_account.html", context)
+
+def edit_recipe_collection_view(request, pk):
+    user = request.user
+    user_id =  request.user.id
+    context = {}
+    postcard_id = pk
+    postcard = RecipeCollection.objects.get(pk=postcard_id)
+    form = RecipeCollectionUpdateForm(request.POST, instance=postcard)
+
+    if not user.is_authenticated:
+        return redirect('login')
+    if request.POST:
+        print('update', form)
+        if form.is_valid():
+            print('view update')
+            form.save()
+            return redirect('account:view', user_id=user.pk)
+        else: 
+            form = RecipeCollectionUpdateForm(request.POST, instance=request.user,
+                initial = {
+                    "id": postcard.pk,
+                    "recipe": postcard.recipe,
+                    "sent": postcard.sent,
+                    "sent_to": postcard.sent_to,
+                    "received": postcard.received,
+                    "received_from": postcard.received_from,
+                    }
+                )
+            context['form'] = form
+    else: 
+        form = RecipeCollectionUpdateForm(
+            initial = {
+                "id": postcard.pk,
+                "recipe": postcard.recipe,
+                "sent": postcard.sent,
+                "sent_to": postcard.sent_to,
+                "received": postcard.received,
+                "received_from": postcard.received_from,
+            })
+        context['form'] = form
+    
+    return render(request, "accounts/postcard_update.html", context)
