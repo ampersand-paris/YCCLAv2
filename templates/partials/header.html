@@ -5,9 +5,9 @@
 		<img class="third auto" src="{% static 'media/exclaimation.png' %}" />
 	</div> -->
 </div>
-<nav class="flex space-btwn header-styling"> 
+<nav class="flex space-btwn mobile-column mobile-al-center header-styling"> 
 	<h1 class="cream-text">YCCLA</h1>
-	<a class="nav-button" href="{% url 'home:about' %}"><p>About</p></a>
+	<a class="nav-button nav-button-first" href="{% url 'home:about' %}"><p>About</p></a>
 	<a class="nav-button" href="{% url 'home:summer' %}"><p>Collections</p></a>
 	<a class="nav-button" href="{% url 'home:recipes' %}"><p>Recipes</p></a>
 
@@ -23,6 +23,4 @@
 		<a class="" href="{% url 'login' %}"><h2>Login</h2></a>
 		<a class="" href="{% url 'register' %}"><h2>Register</h2></a>
 	{% endif %}	 -->
-
-	</div>
 </nav>

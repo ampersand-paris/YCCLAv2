@@ -491,11 +491,8 @@
   }
   
   .image-width {
-    max-width: 30vW;
+    max-width: 50vW;
   }
-  .image-height {
-    max-height: 80vH !important;
-}
 
   /* === PROFILE === */
 
@@ -547,3 +544,50 @@
     overflow: scroll;
   }
 
+@media only screen and (max-width: 600px) {
+  
+  body {
+    padding: 0vH 2vW 5vH 2vW;
+  }
+
+  /* ====== SPACING ====== */
+
+  .mobile-column {
+    flex-direction: column;
+  }
+
+  .mobile-al-center {
+    align-items: center;
+  }
+
+  /* ====== PADDING ====== */
+
+  .inlay-padding {
+    margin: 0vH 3vW;
+  }
+
+  /* ====== WIDTH & HEIGHT ====== */
+
+  .fifty-vw {
+    width: 80vW;
+  }
+
+  /* ====== HEADER ====== */
+
+  .header-styling {
+    padding: 2vH 2vW 2vH 2vW ;
+  }
+  
+  .nav-button {
+    margin: 5px;
+  }
+
+  .nav-button-first {
+    margin-top: 10px;
+  }
+  /* ======= IMAGE ====== */
+
+  .image-width {
+    max-width: 80vW;
+  }
+}
