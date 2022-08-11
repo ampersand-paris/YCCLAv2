@@ -3,12 +3,13 @@
 :root {
     --cream: #F9FAE2;
     --main-red: #9D2D33;
-    --main-blue: #1D5DA0;
+    --main-blue: #5cb5c9;
+    --clay: #a7635d;
   }
   
   body {
     margin: 0;
-    padding: 1vH 2vW;
+    padding: 0vH 5vW 5vH 5vW;
     background-color: var(--cream);
   }
 
@@ -40,7 +41,8 @@
     font-family: bilo, sans-serif;
     font-style: italic;
     font-weight: 700;
-    font-size: 3em;
+    font-size: 70px;
+    line-height: 50px;
     margin: 0;
     padding: 0;
     text-transform: uppercase;
@@ -88,6 +90,7 @@
       margin: 0;
       list-style: none;
   }
+
   li {
     font-family: century-gothic, sans-serif;
     font-weight: 700;
@@ -156,6 +159,7 @@
     letter-spacing: 5px;
     text-transform: uppercase;
   }
+
   /* === SPACING === */
   
   .flex {
@@ -182,10 +186,18 @@
     height: 80vH;
   }
 
+  .jc-center {
+    justify-content: center;
+  }
+
   .center {
     justify-content: center;
   }
   
+  .al-center {
+    align-items: center;
+  }
+
   .col-center {
     align-items: center;
   }
@@ -248,6 +260,39 @@
   .flex-end {
     align-self: flex-end;
   }
+
+/* ====== HEADER ====== */
+
+.header-styling {
+  background-color: var(--main-blue);
+  border-left: 2px solid var(--clay);
+  border-bottom: 2px solid var(--clay);
+  border-right: 2px solid var(--clay);
+  border-radius: 0px 0px 10px 10px;
+  padding: 8vH 2vW 4vH 2vW;
+}
+
+.nav-button {
+  align-items: center;
+  background-color: var(--cream);
+  border-radius: 5px;
+  border: 2px solid var(--clay);
+  display: flex;
+  justify-content: center;
+  padding: 10px 20px;
+  text-align: center;
+  text-transform: uppercase;
+  width: 120px;
+}
+
+.nav-button:hover {
+  filter: drop-shadow(5px 5px 0px var(--clay))
+}
+
+.nav-button p {
+  margin: 0px;
+  color: var(--clay) !important;
+}
 
 /* ====== CHECKBOXES ====== */
 
@@ -456,3 +501,4 @@
     height: 70vH;
     overflow: scroll;
   }
+

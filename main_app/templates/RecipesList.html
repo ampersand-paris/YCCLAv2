@@ -16,13 +16,13 @@
             </div>
             {% if searched %}
                 {% if recipes %}
+                <p class="cream-text">Recipes including '{{ searched }}'</p>
                 {% for recipe in recipes %}
-                    <p class="cream-text">Recipes including '{{ searched }}'</p>
                     <div class="padding margin-top bg-cream red-border">
                         <div class="flex space-btwn">
                             <h2>{{ recipe.title }}</h2>
                         </div>
-                        <a  class="" href="./{{recipe.pk}}/"><button>Full Recipe</button></a> 
+                        <a  class="" href="./{{recipe.pk}}/"><button class="prof-bttn red-border padding margin-top">Full Recipe</button></a> 
                     </div>
                 {% endfor %}
                 {% else %}

@@ -1,15 +1,19 @@
 {% load static %}
-<div class="flex space-btwn">    
-	<h1>You Can Cook Literally Anything</h1>
-	<div class="flex al-center">
+<div class="flex column al-center"> 
+	
+	<!-- <div class="flex al-center">
 		<img class="third auto" src="{% static 'media/exclaimation.png' %}" />
-	</div>
+	</div> -->
 </div>
-<nav class="flex space-btwn padding red-border"> 
-	<a class="" href="{% url 'home:about' %}"><h2>About</h2></a>
-	<a class="" href="{% url 'home:summer' %}"><h2>Summer 2022 Set</h2></a>
-	<a class="" href="{% url 'home:recipes' %}"><h2>Recipes</h2></a>
-	{% if request.user.is_authenticated %}
+<nav class="flex space-btwn header-styling"> 
+	<h1 class="cream-text">YCCLA</h1>
+	<a class="nav-button" href="{% url 'home:about' %}"><p>About</p></a>
+	<a class="nav-button" href="{% url 'home:summer' %}"><p>Collections</p></a>
+	<a class="nav-button" href="{% url 'home:recipes' %}"><p>Recipes</p></a>
+
+	<!-- Theses lines of code will be used when the business expands to allow users to log in -->
+	
+	<!-- {% if request.user.is_authenticated %}
 		{% if request.user.is_recipe_tester %}
 			<a class="" href="{% url 'test-kitchen:list' %}"><h2>Test Kitchen</h2></a>
 		{% endif %}
@@ -18,6 +22,7 @@
 	{% else %}
 		<a class="" href="{% url 'login' %}"><h2>Login</h2></a>
 		<a class="" href="{% url 'register' %}"><h2>Register</h2></a>
-	{% endif %}	
+	{% endif %}	 -->
+
 	</div>
 </nav>
