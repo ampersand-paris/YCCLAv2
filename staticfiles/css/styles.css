@@ -68,10 +68,17 @@
     font-style: italic;
     font-weight: 700;
     font-size: 70px;
-    line-height: 50px;
+    line-height: 60px;
     margin: 0;
     padding: 0;
     text-transform: uppercase;
+
+    -webkit-hyphens: auto;
+    -ms-hyphens: auto;
+    hyphens: auto;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    white-space: normal; //this is the one that gets you all the time 
   }
   
   h2 {
@@ -171,7 +178,6 @@
     font-weight: 400;
     font-style: normal;
     letter-spacing: 5px;
-    line-height: 35px;
   }
 
   .HWT-small {
@@ -565,6 +571,10 @@
   
   body {
     padding: 0vH 2vW 5vH 2vW;
+  }
+
+  h1 {
+    font-size: 50px;
   }
 
   /* ====== SPACING ====== */
