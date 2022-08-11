@@ -272,6 +272,10 @@
     width: 70vW;
   }
 
+  .ninety {
+    width: 90%;
+  }
+
   .fifty-vw {
     width: 50vW;
   }
@@ -283,9 +287,11 @@
   .third {
     width: 30vW;
   }
+
   .full {
   width: 100%;
-}
+  }
+
   .full-width {
     width: 96vW;
   }
@@ -415,15 +421,19 @@
             width: 60vW;
         }
 
-/* ====== RECIPE SPACING ====== */
+/* ====== RECIPES ====== */
 
-        .prof-height {
-            height: 75vH;
-        }
+  .prof-height {
+    height: 75vH;
+  }
         
-        .recipe-detail {
-            width: 50vW;
-        }
+  .recipe-detail {
+    width: 50vW;
+  }
+
+  .recipe-index:hover {
+    filter: drop-shadow(5px 5px 0px var(--main-blue)) !important;
+  }
 
 /* === BORDERS === */
   

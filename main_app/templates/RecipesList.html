@@ -13,11 +13,9 @@
             <button class="prof-bttn red-border margin-top" type="submit">Search</button>
         </form> -->
 
-        <div class="cream-border double-border bg-blue">
-            <div class="prof-post-view flex column bg-blue cream-border padding">  
-                <div class="flex space-btwn  al-center">
-                    <h2 class="cream-text">Recipes</h2> 
-                </div>
+        <div class="fifty-vw margin-bottom bg-cream clay-border-three">
+            <div class="flex column al-center padding">  
+                <h2 class="HWT clay-text">Recipes</h2> 
                 {% if searched %}
                     {% if recipes %}
                     <p class="cream-text">Recipes including '{{ searched }}'</p>
@@ -38,12 +36,9 @@
                     {% endif %}
                 {% else %}
                     {% for recipe in recipes %}
-                        <div class="padding margin-top bg-cream red-border">
-                            <div class="flex space-btwn">
-                                <h2>{{ recipe.title }}</h2>
-                            </div>
-                            <a  href="./{{recipe.pk}}/"><button class="prof-bttn red-border margin-top">Full Recipe</button></a> 
-                        </div>
+                        <a  href="./{{recipe.pk}}/" class="recipe-index ninety padding margin-top" style="background-color: {{ recipe.background_color }}; border: 2px solid {{ recipe.secondary_color }}; filter: drop-shadow(5px 5px 0px {{ recipe.secondary_color }}); border-radius: 5px;">
+                            <h3 class="HWT" style="color: {{ recipe.secondary_color }}">{{ recipe.title }}</h3>  
+                        </a> 
                     {% endfor %}
                 {% endif %}
             </div>
