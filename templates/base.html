@@ -15,8 +15,12 @@
     </title>
 </head>
 <body>
+    <div class="relative">  
     {% include 'partials/header.html' %}
     {% block body %}
-    {% endblock %}  
+    {% endblock %}
+    
+    {% include 'partials/footer.html' %}
+    </div>
 </body>
 </html>

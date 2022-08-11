@@ -14,12 +14,25 @@
   }
 }
 
+@keyframes footer {
+  0% {
+    opacity: 0%;
+  } 
+
+  100%{
+    opacity: 100%;
+  }
+}
+
 .openDrawer {
   animation: openDrawer 2s 2s forwards;
   overflow: hidden;
   height: 0px;
 }
 
+.footerAppear {
+  animation: footer 1s 3s forwards;
+}
 /* === COLOR === */
 
 :root {
@@ -31,7 +44,7 @@
   
   body {
     margin: 0;
-    padding: 0vH 5vW 5vH 5vW;
+    padding: 0vH 5vW 0vH 5vW;
     background-color: var(--cream);
   }
 
@@ -352,6 +365,22 @@
   color: var(--clay) !important;
 }
 
+/* ====== FOOTER ====== */
+
+
+.footer-styling {
+  position: relative;
+  bottom: 0%;
+  background-color: var(--cream);
+  border-left: 2px solid var(--main-blue);
+  border-top: 2px solid var(--main-blue);
+  border-right: 2px solid var(--main-blue);
+  border-radius: 10px 10px 0px 0px;
+  opacity: 0%;
+  margin-top: 5vH;
+  padding: 2vH 2vW 2vH 2vW;
+}
+
 /* ====== CHECKBOXES ====== */
 
   .container {
@@ -570,7 +599,7 @@
 @media only screen and (max-width: 750px) {
   
   body {
-    padding: 0vH 2vW 5vH 2vW;
+    padding: 0vH 2vW 0vH 2vW;
   }
 
   h1 {
@@ -616,6 +645,13 @@
   .nav-button-first {
     margin-top: 10px;
   }
+
+  /* ====== FOOTER ====== */
+
+  .footer-styling {
+    padding: 1vH 2vW 1vH 2vW ;
+  }
+
   /* ======= IMAGE ====== */
 
   .image-width {
