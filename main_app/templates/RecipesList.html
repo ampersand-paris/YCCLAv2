@@ -3,48 +3,52 @@
 
 {% block body %}
 
-<div class="flex margin-top space-btwn">
-    <form method="post">
-        {% csrf_token %}
-        <input type="search" name="searched" placeholder="Search our recipes">
-        <button class="prof-bttn red-border margin-top" type="submit">Search</button>
-    </form>
-    <div class="cream-border double-border bg-blue">
-        <div class="prof-post-view flex column bg-blue cream-border padding">  
-            <div class="flex space-btwn  al-center">
-                <h2 class="cream-text">Recipes</h2> 
-            </div>
-            {% if searched %}
-                {% if recipes %}
-                <p class="cream-text">Recipes including '{{ searched }}'</p>
-                {% for recipe in recipes %}
-                    <div class="padding margin-top bg-cream red-border">
-                        <div class="flex space-btwn">
-                            <h2>{{ recipe.title }}</h2>
-                        </div>
-                        <a  class="" href="./{{recipe.pk}}/"><button class="prof-bttn red-border padding margin-top">Full Recipe</button></a> 
-                    </div>
-                {% endfor %}
-                {% else %}
-                <div class="padding margin-top bg-cream red-border">
-                    <div class="flex space-btwn">
-                        <p>We are sorry, but no recipes match your search: {{ searched }}.</p>
-                    </div>
-                </div>
-                {% endif %}
-            {% else %}
-                {% for recipe in recipes %}
-                    <div class="padding margin-top bg-cream red-border">
-                        <div class="flex space-btwn">
-                            <h2>{{ recipe.title }}</h2>
-                        </div>
-                        <a  href="./{{recipe.pk}}/"><button class="prof-bttn red-border margin-top">Full Recipe</button></a> 
-                    </div>
-                {% endfor %}
-            {% endif %}
-        </div>
-	</div>
+<div class="openDrawer inlay-padding clay-border-three double-border-three bg-blue">
+    <div class="flex column al-center clay-border-three">
+        <!-- This is is the search function for recipes -->
 
+        <!-- <form method="post">
+            {% csrf_token %}
+            <input type="search" name="searched" placeholder="Search our recipes">
+            <button class="prof-bttn red-border margin-top" type="submit">Search</button>
+        </form> -->
+
+        <div class="cream-border double-border bg-blue">
+            <div class="prof-post-view flex column bg-blue cream-border padding">  
+                <div class="flex space-btwn  al-center">
+                    <h2 class="cream-text">Recipes</h2> 
+                </div>
+                {% if searched %}
+                    {% if recipes %}
+                    <p class="cream-text">Recipes including '{{ searched }}'</p>
+                    {% for recipe in recipes %}
+                        <div class="padding margin-top bg-cream red-border">
+                            <div class="flex space-btwn">
+                                <h2>{{ recipe.title }}</h2>
+                            </div>
+                            <a  class="" href="./{{recipe.pk}}/"><button class="prof-bttn red-border padding margin-top">Full Recipe</button></a> 
+                        </div>
+                    {% endfor %}
+                    {% else %}
+                    <div class="padding margin-top bg-cream red-border">
+                        <div class="flex space-btwn">
+                            <p>We are sorry, but no recipes match your search: {{ searched }}.</p>
+                        </div>
+                    </div>
+                    {% endif %}
+                {% else %}
+                    {% for recipe in recipes %}
+                        <div class="padding margin-top bg-cream red-border">
+                            <div class="flex space-btwn">
+                                <h2>{{ recipe.title }}</h2>
+                            </div>
+                            <a  href="./{{recipe.pk}}/"><button class="prof-bttn red-border margin-top">Full Recipe</button></a> 
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
 </div>
 
 {% endblock body %}

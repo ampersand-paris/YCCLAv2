@@ -15,8 +15,9 @@
 }
 
 .openDrawer {
-  animation: openDrawer 2s 1s forwards;
+  animation: openDrawer 2s 2s forwards;
   overflow: hidden;
+  height: 0px;
 }
 
 /* === COLOR === */
@@ -89,7 +90,7 @@
     font-weight: 700;
     margin: 0;
     padding: 0;
-    font-size: 1.5em;
+    font-size: 1.75em;
     text-transform: uppercase;
   }
 
@@ -162,7 +163,6 @@
     font-family: adobe-garamond-pro, serif;
     font-weight: 400;
     font-style: normal;
-    font-size: 2.5em;
     text-transform: lowercase;
   }
 
@@ -243,6 +243,9 @@
     margin-top: 2vH;
   }
 
+  .margin-left {
+    margin-left: 20px;
+  }
   .margin-bottom {
     margin-bottom: 4vH;
   }
@@ -271,6 +274,10 @@
 
   .fifty-vw {
     width: 50vW;
+  }
+
+  .forty-vw {
+    width: 40vW;
   }
 
   .third {
@@ -544,7 +551,7 @@
     overflow: scroll;
   }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 750px) {
   
   body {
     padding: 0vH 2vW 5vH 2vW;
@@ -570,6 +577,10 @@
 
   .fifty-vw {
     width: 80vW;
+  }
+
+  .forty-vw {
+    width: 70vW;
   }
 
   /* ====== HEADER ====== */
