@@ -36,7 +36,7 @@
                     {% endif %}
                 {% else %}
                     {% for recipe in recipes %}
-                        <a  href="./{{recipe.pk}}/" class="recipe-index ninety padding margin-top" style="background-color: {{ recipe.background_color }}; border: 2px solid {{ recipe.secondary_color }}; filter: drop-shadow(5px 5px 0px {{ recipe.secondary_color }}); border-radius: 5px;">
+                        <a  href="./{{recipe.pk}}/" class="recipe-index ninety padding margin-top" style="background-color: {{ recipe.background_color }}; border: 2px solid {{ recipe.secondary_color }}; box-shadow: 5px 5px 0px {{ recipe.secondary_color }}; border-radius: 5px;">
                             <h3 class="HWT" style="color: {{ recipe.secondary_color }}">{{ recipe.title }}</h3>  
                         </a> 
                     {% endfor %}
