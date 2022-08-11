@@ -21,6 +21,8 @@ if not os.environ.get('PRODUCTION'):
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+# STATIC_ROOT = BASE_DIR / 'static'
+
 # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 # BASE_DIR = Path(__file__).resolve().parent.parent
 # STATIC_ROOT = BASE_DIR / 'static'
@@ -32,7 +34,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 # FOR DEVELOPMENT ONLY
 if DEBUG:
@@ -55,12 +57,13 @@ INSTALLED_APPS = [
     'cloudinary',
     'cloudinary_storage',
 
+    "whitenoise.runserver_nostatic",
+    'django.contrib.staticfiles',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-    'django.contrib.staticfiles',
 ]
 
 MIDDLEWARE = [
@@ -156,16 +159,23 @@ USE_TZ = True
 
 # DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloundinaryStorage'
 
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-    os.path.join(BASE_DIR, 'media'),
-]
+
 
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
+# MEDIA_URL = '/media/'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media_cdn')
+# STATIC_ROOT = "static"
+STATIC_ROOT = os.path.join(BASE_DIR, '../static') 
+
+STATICFILES_DIRS = [
+    # '../static'
+    os.path.join(BASE_DIR, 'static'),
+    # os.path.join(BASE_DIR, 'media'),
+]
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'static')
+
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.StaticFilesStorage'
 
