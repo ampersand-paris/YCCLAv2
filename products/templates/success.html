@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+    <title>Thanks for your order!</title>
+{% endblock title%}
+
+{% block body %}
+    <div class="openDrawer inlay-padding clay-border-three double-border-three bg-blue">
+        <div class="flex column al-center clay-border-three">
+            <div class="fifty-vw margin-bottom bg-cream clay-border-three">
+                <div class="flex column al-center padding">
+                    <h2 class="HWT" style="color: #E58C87">success</h2>
+                    <p>We will be placing your purchase in the snail mail soon! If you have any questions, please email
+                        <a href="mailto:youcancookliterallyanything@gmail.com">youcancookliterallyanything@gmail.com</a>.
+                    </p>
+                </div>
+            </div>
+        </div>        
+    </div>
+{% endblock body %}

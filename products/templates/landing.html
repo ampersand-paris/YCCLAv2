@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+   Summer Series
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+{% endblock title %}
+
+{% block script %}
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+{% endblock script %}
+
+{% block body %}
+    <div class="openDrawer inlay-padding clay-border-three double-border-three bg-blue">
+        <div class="flex column al-center clay-border-three">
+            <div class="fifty-vw margin-bottom bg-cream clay-border-three">
+                <div class="flex column al-center padding">
+                    <h2 class="HWT" style="color: #E58C87">{{ product.name }}</h2>
+                    <img class="image-width image-height"src="{% static 'media/SummerTitlePage.png' %}" />
+                    <div class="forty-vw flex space-btwn margin-top">
+                        <div class="flex column">
+                            <h3 class="garamond" style="color: #E58C87">postcards</h3>    
+                            <ul style="color: #76C498">
+                                <li>Cover Card</li>
+                                <li>Fried Green Tomatoes</li>
+                                <li>Pickled Tomatoes</li>
+                                <li>Buttermilk Dressing</li>
+                                <li>Fried Green Tomato, Pickled Tomato Sandy</li>
+                                <li>Pesto</li>
+                                <li>Brown Rice and Caramelized Peach Milk</li>
+                                <li>Garlic Scapes with Mint</li>
+                            </ul>
+                        </div>
+                        <div class="flex column margin-left">
+                            <h3 class="garamond" style="color: #E58C87">details</h3>    
+                            <ul style="color: #76C498">
+                                <li >8 4x6 postcards</li>
+                                <li >Postage not included</li>
+                            </ul>
+                        </div>
+                    </div>
+                        {% for price in prices %}
+                        <div>
+                            <p>${{ price.price }}</p>
+                            <section>
+                                <form action="create-checkout-session/{{price.id}}" method="POST">
+                                    {% csrf_token %}
+                                    <button type="submit" id="checkout-button">Checkout</button>
+                                </form>
+                            </section>
+                        </div>
+                        {% endfor %}
+                </div>
+            </div>
+        </div>        
+    </div>
+{% endblock body %}

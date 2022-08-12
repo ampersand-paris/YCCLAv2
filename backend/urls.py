@@ -29,6 +29,7 @@ urlpatterns = [
     path('', include('main_app.urls', namespace="home")),
     path('admin/', admin.site.urls),
     path('account/', include('accounts.urls', namespace="account")),
+    path('collections/', include('products.urls', namespace="collections")),
     path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('test-kitchen/', include('test_kitchen.urls', namespace="test-kitchen")),   
