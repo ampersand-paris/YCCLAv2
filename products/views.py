@@ -19,6 +19,7 @@ class CollectionsView(TemplateView):
         context = super(CollectionsView, self).get_context_data(**kwargs)
         context.update({
             "product": product,
+            'quantity': 1,
             "prices": prices
         })
         return context
@@ -39,6 +40,11 @@ class CreateCheckoutSessionView(View):
                 {
                     'price': price.stripe_price_id,
                     'quantity': 1,
+                    'adjustable_quantity': {
+                        'enabled': True,
+                        'minimum': 1,
+                        'maximum': 10,
+                    },
                 },
             ],
             mode='payment',

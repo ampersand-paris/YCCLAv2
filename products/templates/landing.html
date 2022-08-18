@@ -43,7 +43,7 @@
                     </div>
                         {% for price in prices %}
                         <div class="flex column al-center margin-top">
-                            <h3 class="HWT" style="color: #E58C87;">${{ price.price }}</h3>
+                            <h3 class="HWT" style="color: #E58C87;">${{ price.get_display_price }}</h3>
                             <section>
                                 <form action="create-checkout-session/{{price.id}}" method="POST">
                                     {% csrf_token %}
