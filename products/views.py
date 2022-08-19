@@ -1,14 +1,17 @@
 import stripe 
+from django.core.mail import send_mail 
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
 from django.conf import settings
 from django.http import JsonResponse
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt # new
+from django.http import HttpResponse
 
 from products.models import Price, Product
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
+endpoint_secret = 'whsec_eabf06fd5217b4d1a349c02f63bc98caded68f216db1b0f3785eba2edaec8b5a'
 
 class CollectionsView(TemplateView):
     template_name = "landing.html"
@@ -50,9 +53,48 @@ class CreateCheckoutSessionView(View):
             mode='payment',
             success_url=settings.BASE_URL + '/collections/success/',
             cancel_url=settings.BASE_URL + '/collections/cancel/',
+            # consent_collection={
+            #     'promotions': 'auto',
+            # },
         )
         return redirect(checkout_session.url)
 
+@csrf_exempt
+def stripe_webhook(request):
+    payload = request.body
+    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+    event = None
+
+    try:
+        event = stripe.Webhook.construct_event(
+        payload, sig_header, endpoint_secret
+        )
+    except ValueError as e:
+        # Invalid payload
+        return HttpResponse(status=400)
+    except stripe.error.SignatureVerificationError as e:
+        # Invalid signature
+        return HttpResponse(status=400)
+    # For now, you only need to print out the webhook payload so you can see
+    # the structure.
+    print(payload)
+
+    if event['type'] == 'checkout.session.completed':
+        session = event['data']['object']
+
+        customer_email = session["customer_details"]["email"]
+        product_id = session["medtadata"]["product_id"]
+        
+        send_mail(
+            subject="Your YCCLA Purchase!",
+            message="Thank you for your purchase. Your product is below and will be processed and shipped within 3-5 business days.",
+            recipeient_list=[customer_email], 
+            from_email="youcancookliterallyanything@gmail.com"
+        )
+
+
+    return HttpResponse(status=200)
+  
 @csrf_exempt
 def create_checkout_session(request):
     print('hello')
