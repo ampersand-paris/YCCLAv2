@@ -11,6 +11,7 @@ from django.http import HttpResponse
 from products.models import Price, Product
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
+endpoint_secret = settings.ENDPOINT_SECRET
 
 class CollectionsView(TemplateView):
     template_name = "landing.html"
@@ -93,28 +94,3 @@ def stripe_webhook(request):
 
 
     return HttpResponse(status=200)
-  
-@csrf_exempt
-def create_checkout_session(request):
-    print('hello')
-    YOUR_DOMAIN = "https://127.0.0.1:8000"
-    try:
-        checkout_session = stripe.checkout.Session.create(
-            line_items=[
-                {
-                    # Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-                    'price': 'price_1LVyLbEh2FpKEa7eQkGjYrjx',
-                    'quantity': 1,
-                },
-            ],
-            mode='payment',
-            success_url=YOUR_DOMAIN + '/success/',
-            cancel_url=YOUR_DOMAIN + '/cancel/',
-            automatic_tax={'enabled': True},
-        )
-    except Exception as e:
-        return str(e)
-    print(checkout_session.url)
-    return redirect(checkout_session.url, code=303)
-
-    
