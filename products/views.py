@@ -1,4 +1,4 @@
-# import stripe 
+import stripe 
 from django.core.mail import send_mail 
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
@@ -10,7 +10,7 @@ from django.http import HttpResponse
 
 from products.models import Price, Product
 
-# stripe.api_key = settings.STRIPE_SECRET_KEY
+stripe.api_key = settings.STRIPE_SECRET_KEY
 endpoint_secret = settings.ENDPOINT_SECRET
 
 class CollectionsView(TemplateView):

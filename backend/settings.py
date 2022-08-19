@@ -57,7 +57,7 @@ INSTALLED_APPS = [
     'cloudinary',
     'cloudinary_storage',
     'products',
-
+    'stripe',
     "whitenoise.runserver_nostatic",
     'django.contrib.staticfiles',
     'django.contrib.admin',
