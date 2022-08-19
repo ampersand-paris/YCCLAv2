@@ -11,7 +11,6 @@ from django.http import HttpResponse
 from products.models import Price, Product
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
-endpoint_secret = 'whsec_eabf06fd5217b4d1a349c02f63bc98caded68f216db1b0f3785eba2edaec8b5a'
 
 class CollectionsView(TemplateView):
     template_name = "landing.html"
