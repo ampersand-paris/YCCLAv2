@@ -9,9 +9,9 @@ from .views import (
     RecipeDetail,
 )
 
-from products.views import (
-    stripe_webhook
-)
+# from products.views import (
+#     # stripe_webhook
+# )
 
 app_name = "main_app"
 
@@ -20,7 +20,7 @@ urlpatterns = [
     path('recipes/', recipe_search, name='recipes'),
     path('summer2022/', summer_2022_view, name='summer'),
     path('recipes/<pk>/', RecipeDetail.as_view(), name='recipe-detail'),
-    path('webhook/', stripe_webhook, name="stripe-webhook"),
+    # path('webhook/', stripe_webhook, name="stripe-webhook"),
 ]
 
 

@@ -1,4 +1,5 @@
-import stripe 
+# import stripe 
+
 from django.core.mail import send_mail 
 from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
@@ -10,8 +11,8 @@ from django.http import HttpResponse
 
 from products.models import Price, Product
 
-stripe.api_key = settings.STRIPE_SECRET_KEY
-endpoint_secret = settings.ENDPOINT_SECRET
+# stripe.api_key = settings.STRIPE_SECRET_KEY
+# endpoint_secret = settings.ENDPOINT_SECRET
 
 class CollectionsView(TemplateView):
     template_name = "landing.html"
@@ -33,64 +34,68 @@ def success_view(request):
 def cancel_view(request):
 	return render(request, "cancel.html")
 
-class CreateCheckoutSessionView(View):
+# STRIP SESSION - TO BE UNCOMMENTED WHEN STORE IS LIVE
 
-    def post(self, request, *args, **kwargs):
-        price = Price.objects.get(id=self.kwargs["pk"])
-        checkout_session = stripe.checkout.Session.create(
-            payment_method_types=['card'],
-            line_items=[
-                {
-                    'price': price.stripe_price_id,
-                    'quantity': 1,
-                    'adjustable_quantity': {
-                        'enabled': True,
-                        'minimum': 1,
-                        'maximum': 10,
-                    },
-                },
-            ],
-            mode='payment',
-            success_url=settings.BASE_URL + '/collections/success/',
-            cancel_url=settings.BASE_URL + '/collections/cancel/',
-            # consent_collection={
-            #     'promotions': 'auto',
-            # },
-        )
-        return redirect(checkout_session.url)
+# class CreateCheckoutSessionView(View):
 
-@csrf_exempt
-def stripe_webhook(request):
-    payload = request.body
-    sig_header = request.META['HTTP_STRIPE_SIGNATURE']
-    event = None
+#     def post(self, request, *args, **kwargs):
+#         price = Price.objects.get(id=self.kwargs["pk"])
+#         checkout_session = stripe.checkout.Session.create(
+#             payment_method_types=['card'],
+#             line_items=[
+#                 {
+#                     'price': price.stripe_price_id,
+#                     'quantity': 1,
+#                     'adjustable_quantity': {
+#                         'enabled': True,
+#                         'minimum': 1,
+#                         'maximum': 10,
+#                     },
+#                 },
+#             ],
+#             mode='payment',
+#             success_url=settings.BASE_URL + '/collections/success/',
+#             cancel_url=settings.BASE_URL + '/collections/cancel/',
+#             # consent_collection={
+#             #     'promotions': 'auto',
+#             # },
+#         )
+#         return redirect(checkout_session.url)
 
-    try:
-        event = stripe.Webhook.construct_event(
-        payload, sig_header, endpoint_secret
-        )
-    except ValueError as e:
-        # Invalid payload
-        return HttpResponse(status=400)
-    except stripe.error.SignatureVerificationError as e:
-        # Invalid signature
-        return HttpResponse(status=400)
-    # For now, you only need to print out the webhook payload so you can see
-    # the structure.
-    print(payload)
+# STRIP WEBHOOK - TO BE UNCOMMENTED WHEN STORE IS LIVE
 
-    if event['type'] == 'checkout.session.completed':
-        session = event['data']['object']
+# @csrf_exempt
+# def stripe_webhook(request):
+#     payload = request.body
+#     sig_header = request.META['HTTP_STRIPE_SIGNATURE']
+#     event = None
 
-        customer_email = session["customer_details"]["email"]
-        product_id = session["medtadata"]["product_id"]
+#     try:
+#         event = stripe.Webhook.construct_event(
+#         payload, sig_header, endpoint_secret
+#         )
+#     except ValueError as e:
+#         # Invalid payload
+#         return HttpResponse(status=400)
+#     except stripe.error.SignatureVerificationError as e:
+#         # Invalid signature
+#         return HttpResponse(status=400)
+#     # For now, you only need to print out the webhook payload so you can see
+#     # the structure.
+#     print(payload)
+
+#     if event['type'] == 'checkout.session.completed':
+#         session = event['data']['object']
+
+#         customer_email = session["customer_details"]["email"]
+#         product_id = session["medtadata"]["product_id"]
         
-        send_mail(
-            subject="Your YCCLA Purchase!",
-            message="Thank you for your purchase. Your product is below and will be processed and shipped within 3-5 business days.",
-            recipeient_list=[customer_email], 
-            from_email="youcancookliterallyanything@gmail.com"
-        )
+#         send_mail(
+#             subject="Your YCCLA Purchase!",
+#             message="Thank you for your purchase. Your product is below and will be processed and shipped within 3-5 business days.",
+#             recipeient_list=[customer_email], 
+#             from_email="youcancookliterallyanything@gmail.com"
+#         )
 
 
-    return HttpResponse(status=200)
+#     return HttpResponse(status=200)
