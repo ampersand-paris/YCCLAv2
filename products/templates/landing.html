@@ -17,7 +17,8 @@
         <div class="flex column al-center clay-border-three">
             <div class="fifty-vw margin-bottom bg-cream clay-border-three">
                 <div class="flex column al-center padding">
-                    <h2 class="HWT" style="color: #E58C87">{{ product.name }}</h2>
+                    <!-- <h2 class="HWT" style="color: #E58C87">{{ product.name }}</h2> -->
+                    <h2 class="HWT" style="color: #E58C87">Summer Series</h2>
                     <img class="image-width image-height"src="{% static 'media/SummerTitlePage.png' %}" />
                     <div class="forty-vw flex space-btwn margin-top">
                         <div class="flex column">
@@ -41,19 +42,23 @@
                             </ul>
                         </div>
                     </div>
-                        {% for price in prices %}
                         <div class="flex column al-center margin-top">
-                            <h3 class="HWT" style="color: #E58C87;">${{ price.get_display_price }}</h3>
-                            <!-- <section>
-                                <form action="create-checkout-session/{{price.id}}" method="POST">
-                                    {% csrf_token %}
-                                    <button class="checkout-button" style="border-color: #E58C87; color: #E58C87; box-shadow: 5px 5px 0px  #E58C87;" type="submit" id="checkout-button">
-                                        <h3 class="HWT">Purchase</h3>
-                                    </button>
-                                </form>
-                            </section> -->
+                            <h3 class="HWT" style="color: #E58C87;">$20.00</h3>
+                            
                         </div>
-                        {% endfor %}
+                        <!-- {% for price in prices %}
+                            <div class="flex column al-center margin-top">
+                                <h3 class="HWT" style="color: #E58C87;">${{ price.get_display_price }}</h3>
+                                <section>
+                                    <form action="create-checkout-session/{{price.id}}" method="POST">
+                                        {% csrf_token %}
+                                        <button class="checkout-button" style="border-color: #E58C87; color: #E58C87; box-shadow: 5px 5px 0px  #E58C87;" type="submit" id="checkout-button">
+                                            <h3 class="HWT">Purchase</h3>
+                                        </button>
+                                    </form>
+                                </section>
+                            </div>
+                        {% endfor %} -->
                 </div>
             </div>
         </div>        

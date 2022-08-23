@@ -17,16 +17,16 @@ from products.models import Price, Product
 class CollectionsView(TemplateView):
     template_name = "landing.html"
     
-    def get_context_data(self, **kwargs):
-        product = Product.objects.get(name="Summer Series")
-        prices = Price.objects.filter(product=product)
-        context = super(CollectionsView, self).get_context_data(**kwargs)
-        context.update({
-            "product": product,
-            'quantity': 1,
-            "prices": prices
-        })
-        return context
+    # def get_context_data(self, **kwargs):
+    #     product = Product.objects.get(name="Summer Series")
+    #     prices = Price.objects.filter(product=product)
+    #     context = super(CollectionsView, self).get_context_data(**kwargs)
+    #     context.update({
+    #         "product": product,
+    #         'quantity': 1,
+    #         "prices": prices
+    #     })
+    #     return context
 
 def success_view(request):
 	return render(request, "success.html")
