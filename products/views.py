@@ -1,4 +1,4 @@
-# import stripe 
+import stripe 
 
 from django.core.mail import send_mail 
 from django.shortcuts import render, redirect
@@ -11,22 +11,22 @@ from django.http import HttpResponse
 
 from products.models import Price, Product
 
-# stripe.api_key = settings.STRIPE_SECRET_KEY
-# endpoint_secret = settings.ENDPOINT_SECRET
+stripe.api_key = settings.STRIPE_SECRET_KEY
+endpoint_secret = settings.ENDPOINT_SECRET
 
 class CollectionsView(TemplateView):
     template_name = "landing.html"
     
-    # def get_context_data(self, **kwargs):
-    #     product = Product.objects.get(name="Summer Series")
-    #     prices = Price.objects.filter(product=product)
-    #     context = super(CollectionsView, self).get_context_data(**kwargs)
-    #     context.update({
-    #         "product": product,
-    #         'quantity': 1,
-    #         "prices": prices
-    #     })
-    #     return context
+    def get_context_data(self, **kwargs):
+        product = Product.objects.get(name="Summer Series")
+        prices = Price.objects.filter(product=product)
+        context = super(CollectionsView, self).get_context_data(**kwargs)
+        context.update({
+            "product": product,
+            'quantity': 1,
+            "prices": prices
+        })
+        return context
 
 def success_view(request):
 	return render(request, "success.html")
@@ -36,31 +36,31 @@ def cancel_view(request):
 
 # STRIP SESSION - TO BE UNCOMMENTED WHEN STORE IS LIVE
 
-# class CreateCheckoutSessionView(View):
+class CreateCheckoutSessionView(View):
 
-#     def post(self, request, *args, **kwargs):
-#         price = Price.objects.get(id=self.kwargs["pk"])
-#         checkout_session = stripe.checkout.Session.create(
-#             payment_method_types=['card'],
-#             line_items=[
-#                 {
-#                     'price': price.stripe_price_id,
-#                     'quantity': 1,
-#                     'adjustable_quantity': {
-#                         'enabled': True,
-#                         'minimum': 1,
-#                         'maximum': 10,
-#                     },
-#                 },
-#             ],
-#             mode='payment',
-#             success_url=settings.BASE_URL + '/collections/success/',
-#             cancel_url=settings.BASE_URL + '/collections/cancel/',
-#             # consent_collection={
-#             #     'promotions': 'auto',
-#             # },
-#         )
-#         return redirect(checkout_session.url)
+    def post(self, request, *args, **kwargs):
+        price = Price.objects.get(id=self.kwargs["pk"])
+        checkout_session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[
+                {
+                    'price': price.stripe_price_id,
+                    'quantity': 1,
+                    'adjustable_quantity': {
+                        'enabled': True,
+                        'minimum': 1,
+                        'maximum': 10,
+                    },
+                },
+            ],
+            mode='payment',
+            success_url=settings.BASE_URL + '/collections/success/',
+            cancel_url=settings.BASE_URL + '/collections/cancel/',
+            # consent_collection={
+            #     'promotions': 'auto',
+            # },
+        )
+        return redirect(checkout_session.url)
 
 # STRIP WEBHOOK - TO BE UNCOMMENTED WHEN STORE IS LIVE
 
