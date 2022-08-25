@@ -11,6 +11,8 @@ gunicorn = "*"
 pillow = "*"
 cloudinary = "*"
 django-cloudinary-storage = "*"
+stripe = "*"
+sentry_sdk = "*"
 
 [dev-packages]
 
