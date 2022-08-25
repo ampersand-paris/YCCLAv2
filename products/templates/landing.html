@@ -17,8 +17,8 @@
         <div class="flex column al-center clay-border-three">
             <div class="fifty-vw margin-bottom bg-cream clay-border-three">
                 <div class="flex column al-center padding">
-                    <h2 class="HWT" style="color: #E58C87">{{ product.name }}</h2>
-                    <!-- <h2 class="HWT" style="color: #E58C87">Summer Series</h2> -->
+                    <!-- <h2 class="HWT" style="color: #E58C87">{{ product.name }}</h2> -->
+                    <h2 class="HWT" style="color: #E58C87">Summer Series</h2>
                     <img class="image-width image-height"src="{% static 'media/SummerTitlePage.png' %}" />
                     <div class="forty-vw flex space-btwn margin-top">
                         <div class="flex column">
@@ -42,11 +42,11 @@
                             </ul>
                         </div>
                     </div>
-                        <!-- <div class="flex column al-center margin-top">
+                        <div class="flex column al-center margin-top">
                             <h3 class="HWT" style="color: #E58C87;">$20.00</h3>
                             
-                        </div> -->
-                        {% for price in prices %}
+                        </div>
+                        <!-- {% for price in prices %}
                             <div class="flex column al-center margin-top">
                                 <h3 class="HWT" style="color: #E58C87;">${{ price.get_display_price }}</h3>
                                 <section>
@@ -58,7 +58,7 @@
                                     </form>
                                 </section>
                             </div>
-                        {% endfor %}
+                        {% endfor %} -->
                 </div>
             </div>
         </div>        
